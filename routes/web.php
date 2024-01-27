@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dependents');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/200ceb26807d6bf99fd6f4f0d1ca54d4', function () {
@@ -30,6 +30,9 @@ Route::get('/2b22337f218b2d82dfc3b6f77e7cb8ec', function () {
     return view('superadministrator');
 })->middleware(['auth', 'verified'])->name('superadministrator');
 
+Route::get('/2b22337f218b2d82dfc3b6f77e7cb8ec', function () {
+    return view('superadministrator');
+})->middleware(['auth', 'verified'])->name('dependents.create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
