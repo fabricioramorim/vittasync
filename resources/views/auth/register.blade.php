@@ -9,6 +9,49 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Register -->
+        <div class="mt-4">
+            <x-input-label for="register" :value="__('Matrícula')" />
+            <x-text-input id="register" class="block mt-1 w-full" type="text" name="register" :value="old('register')" required autocomplete="register" />
+            <x-input-error :messages="$errors->get('register')" class="mt-2" />
+        </div>
+
+        <!-- Telefone id phone -->
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Telefone')" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autocomplete="phone" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+
+        <!-- Select Administrador id is_admin -->
+        <div class="mt-4">
+            <x-input-label for="is_admin" :value="__('Administrador')" />
+            <select name="is_admin" id="is_admin" class="block mt-1 w-full">
+                <option value="0">Não</option>
+                <option value="1">Sim</option>
+            </select>
+            <x-input-error :messages="$errors->get('is_admin')" class="mt-2" />
+        </div>
+
+        <!-- Select Usuario Bloqueado id is_active -->
+        <div class="mt-4">
+            <x-input-label for="is_active" :value="__('Bloqueado')" />
+            <select name="is_active" id="is_active" class="block mt-1 w-full">
+                <option value="0">Não</option>
+                <option value="1">Sim</option>
+            </select>
+            <x-input-error :messages="$errors->get('is_active')" class="mt-2" />
+        </div>
+
+        <!-- Select Unidade id unit_id -->
+        <div class="mt-4">
+            <x-input-label for="unit_id" :value="__('Unidade')" />
+            <select name="unit_id" id="unit_id" class="block mt-1 w-full">
+                <option value="0">Default</option>
+            </select>
+            <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
