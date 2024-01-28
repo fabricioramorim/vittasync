@@ -1,4 +1,8 @@
 <x-guest-layout>
+
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -11,9 +15,9 @@
 
         <!-- Register -->
         <div class="mt-4">
-            <x-input-label for="register" :value="__('Matrícula')" />
-            <x-text-input id="register" class="block mt-1 w-full" type="text" name="register" :value="old('register')" required autocomplete="register" />
-            <x-input-error :messages="$errors->get('register')" class="mt-2" />
+            <x-input-label for="registration" :value="__('Matrícula')" />
+            <x-text-input id="registration" class="block mt-1 w-full" type="text" name="registration" :value="old('registration')" required autocomplete="registration" />
+            <x-input-error :messages="$errors->get('registration')" class="mt-2" />
         </div>
 
         <!-- Telefone id phone -->
@@ -47,10 +51,15 @@
         <div class="mt-4">
             <x-input-label for="unit_id" :value="__('Unidade')" />
             <select name="unit_id" id="unit_id" class="block mt-1 w-full">
-                <option value="0">Default</option>
+                @if($unit->count() > 0)
+                    @foreach($unit as $rs)
+                        <option value="{{ $rs->id }}">{{ $rs->name }}</option>
+                    @endforeach
+                @else
+                    <option value="0">Unidades não encontradas</option>
+                @endif
             </select>
             <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
-        </div>
 
         <!-- Email Address -->
         <div class="mt-4">

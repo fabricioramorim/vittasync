@@ -7,9 +7,9 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="register" :value="__('Matrícula')" />
-            <x-text-input id="register" class="block mt-1 w-full" type="text" name="register" :value="old('register')" required autofocus autocomplete="register" />
-            <x-input-error :messages="$errors->get('register')" class="mt-2" />
+            <x-input-label for="registration" :value="__('Matrícula')" />
+            <x-text-input id="registration" class="block mt-1 w-full" type="text" name="registration" :value="old('registration')" required autofocus autocomplete="registration" />
+            <x-input-error :messages="$errors->get('registration')" class="mt-2" />
         </div>
 
         <!-- Password -->

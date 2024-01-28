@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Query\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,10 +35,16 @@ Route::get('/2b22337f218b2d82dfc3b6f77e7cb8ec', function () {
     return view('superadministrator');
 })->middleware(['auth', 'verified'])->name('dependents.create');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::controller(UnitController::class)->prefix('units')->group(function (){
+        Route::get('', 'index')->name('auth.register');
+    });
+    
 });
 
 require __DIR__.'/auth.php';
