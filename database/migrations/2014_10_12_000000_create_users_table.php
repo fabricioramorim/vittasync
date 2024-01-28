@@ -16,8 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('registration')->unique();
             $table->string('phone');
+            $table->string('cep');
+            $table->string('address');
+            $table->string('number');
             $table->string('is_admin')->default('0');
-            $table->string('is_active')->default('0');
+            $table->string('is_active')->default('1');
+            $table->string('vaccin_confirm')->default('0');
             $table->string('unit_id')->default('0');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

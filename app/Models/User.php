@@ -26,6 +26,7 @@ class User extends Authenticatable
         'number',
         'is_admin',
         'is_active',
+        'vaccin_confirm',
         'unit_id',
         'email',
         'password',

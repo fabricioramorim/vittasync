@@ -15,14 +15,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-
         DB::table('users')->insert([
             'id' => '1',
-            'name' => Str::random(10),
+            'name' => 'Fabricio Amorim',
             'registration' => '2671',
-            'phone' => '11953704921',
-            'is_admin' => '1',
+            'phone' => '+5511953704921',
+            'cep' => '06766200',
+            'address' => 'Rua João de Barros, 100',
+            'number' => '100',
+            'is_admin' => '0',
             'is_active' => '1',
+            'vaccin_confirm' => '0',
             'unit_id' => '1',
             'email' => 'contato@fabrioceras.com',
             'email_verified_at' => now(),

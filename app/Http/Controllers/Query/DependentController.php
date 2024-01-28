@@ -15,6 +15,14 @@ use Illuminate\View\View;
 
 class DependentController extends Controller
 {
+
+    public readonly Dependent $dependent;
+
+    public function __construct()
+    {
+        $this->dependent = new Dependent();
+    }
+
     public function index()
     {
         $dependent = Dependent::orderBy('created_at', 'DESC')->get();
@@ -36,7 +44,7 @@ class DependentController extends Controller
             'phone' => ['required', 'string', 'max:255'],
             'vaccine_id' => ['required', 'int', 'max:255'],
         ]);
-    
+       
         try {
             $user = Dependent::create([
                 'name' => $request->name,
@@ -48,10 +56,25 @@ class DependentController extends Controller
                 'employee_id' => Auth::user()->id,
                 'is_active' => 1,
             ]);
-    
-            return redirect(RouteServiceProvider::HOME)->with('status', 'Dependente cadastrado com sucesso!');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+        } catch (QueryException $e) {
+            if ($e->errorInfo[1] === 1062) { 
+                return redirect(RouteServiceProvider::HOME)->with('message', 'CPF já cadastrado!')->with('type', 'danger');
+            } else {
+                throw $e; 
+            }
         }
+    
+        return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $updated = $this->dependent->where('id', $id)->update($request->except('_token', '_method'));
+
+        if ($updated) {
+            return redirect()->back()->with('message', 'Dependente atualizado com sucesso!')->with('type', 'success');
+        }
+
+        return redirect()->back()->with('message', 'Erro ao atualizar dependente!')->with('type', 'danger');
     }
 }

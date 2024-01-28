@@ -37,8 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DependentController::class, 'index'])
                 ->name('dashboard');
 
-    Route::post('dashboard', [DependentController::class, 'store']);
+    Route::post('dashboard', [DependentController::class, 'store'])
+                ->name('dashboard.store');
 
+    Route::put('dashboard/{dependent}', [DependentController::class, 'update'])
+                ->name('dashboard.update');
 
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');

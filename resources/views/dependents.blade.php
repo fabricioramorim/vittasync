@@ -1,4 +1,6 @@
 <x-app-layout>
+
+    <!-- Header -->
     <x-slot name="header">
         <h2
             class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight flex justify-between ml-1 mr-2 items-center">
@@ -23,50 +25,54 @@
         </h2>
     </x-slot>
 
-    @if (Session::has('success'))
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
-            <div role="alert">
-                <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                    Danger
-                </div>
-                <div
-                    class="border border-t-0 border-red-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
-                    {{ Session::get('success') }}
-                </div>
-            </div>
-        </div>
-    @endif
-    @if (Session::has('error'))
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
-            <div role="alert">
-                <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                    Danger
-                </div>
-                <div
-                    class="border border-t-0 border-red-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
-                    {{ Session::get('error') }}
+    <!-- Alert message from controller store -->
+    @if (session()->has('message') && session()->get('type') == 'danger')
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+                <div role="alert">
+                    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                        Erro
+                    </div>
+                    <div
+                        class="border border-t-0 border-red-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
+                        {{ session()->get('message') }}
+                    </div>
                 </div>
             </div>
         </div>
     @endif
-    <!-- Alert top -->
 
+    @if (session()->has('message') && session()->get('type') == 'success')
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+                <div role="alert">
+                    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+                        Erro
+                    </div>
+                    <div
+                        class="border border-t-0 border-green-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
+                        {{ session()->get('message') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Alert top -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-8">
         <div role="alert">
-            <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+            <div class="bg-yellow-500 text-white font-bold rounded-t px-4 py-2">
                 Atenção!
             </div>
             <div
-                class="border border-t-0 border-red-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
+                class="border border-t-0 border-yellow-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
                 {{ __('A vacina aplicada será descontada em folha de pagamento.') }}
             </div>
         </div>
     </div>
 
-
     <!-- List of dependents -->
     <div class="grid grid-cols-3 gap-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-
 
         @if ($dependent->count() > 0)
             @foreach ($dependent as $rs)
@@ -147,17 +153,9 @@
                 </div>
             @endforeach
 
-
         @endif
 
-
-
-
-
-
     </div>
-
-
 
     <!-- Register modal -->
     <div id="registerD-modal" tabindex="-1" aria-hidden="true"
@@ -182,7 +180,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" method="POST" action="{{ route('dashboard') }}">
+                <form class="p-4 md:p-5" method="POST" action="{{ route('dashboard.store') }}">
                     @csrf
 
                     <div class="grid gap-4 mb-4 grid-cols-2">
@@ -229,8 +227,9 @@
                         </div>
 
                         <!-- Vacina id vaccine_id -->
-                        <label for="phone"
-                            class="block text-sm font-medium text-gray-900 dark:text-white">Selecione abaixo:</label>
+                        <label for="vaccine_id" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            <p class="text-sm text-red-500">*Obrigatório </p>Selecione abaixo:
+                        </label>
 
                         <ul class="space-y-4 mb-4 col-span-2">
                             <li>
@@ -291,8 +290,10 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form class="p-4 md:p-5" method="POST" action="{{ route('dashboard') }}">
+                        <form class="p-4 md:p-5" method="POST"
+                            action="{{ route('dashboard.update', ['dependent' => $rs->id]) }}">
                             @csrf
+                            @method('PUT')
 
                             <div class="grid gap-4 mb-4 grid-cols-2">
                                 <!-- Nome -->
@@ -346,11 +347,10 @@
 
                                 <ul class="space-y-4 mb-4 col-span-2">
                                     <li>
-                                        <input type="radio" id="1" name="vaccine_id" value="1"
-                                            class="hidden peer"
-                                            @if ($rs->vaccine_id == 1) @checked(true) @endif
-                                            required>
-                                        <label for="1"
+                                        <input type="radio" id="vaccine_id?id=1{{ $rs->id }}"
+                                            name="vaccine_id" value="1" class="hidden peer"
+                                            @if ($rs->vaccine_id == 1) checked @endif required>
+                                        <label for="vaccine_id?id=1{{ $rs->id }}"
                                             class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-green-500 peer-checked:border-green-600 peer-checked:text-green-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
                                             <div class="block">
                                                 <div class="w-full text-lg font-semibold">Adepto à vacinação</div>
@@ -358,10 +358,10 @@
                                         </label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="2" name="vaccine_id" value="2"
-                                            class="hidden peer"
-                                            @if ($rs->vaccine_id == 2) @checked(true) @endif>
-                                        <label for="2"
+                                        <input type="radio" id="vaccine_id?id=2{{ $rs->id }}"
+                                            name="vaccine_id" value="2" class="hidden peer"
+                                            @if ($rs->vaccine_id == 2) checked @endif>
+                                        <label for="vaccine_id?id=2{{ $rs->id }}"
                                             class="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-500 dark:peer-checked:text-red-500 peer-checked:border-red-600 peer-checked:text-red-600 hover:text-gray-900 hover:bg-gray-100 dark:text-white dark:bg-gray-600 dark:hover:bg-gray-500">
                                             <div class="block">
                                                 <div class="w-full text-lg font-semibold">Inapto à vacinação</div>
