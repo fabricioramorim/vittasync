@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Query\UnitController;
+use App\Http\Controllers\Query\DependentController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -33,10 +34,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('dependent', [RegisteredUserController::class, 'create'])
-    ->name('dependent');
+    Route::get('dashboard', [DependentController::class, 'index'])
+                ->name('dashboard');
 
-    Route::post('dependent', [RegisteredUserController::class, 'store']);
+    Route::post('dashboard', [DependentController::class, 'store']);
 
 
     Route::get('register', [RegisteredUserController::class, 'create'])
