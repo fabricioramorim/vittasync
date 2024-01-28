@@ -34,20 +34,24 @@ class DependentController extends Controller
             'cpf' => ['required', 'string', 'max:255', 'unique:'.Dependent::class],
             'birth_date' => ['required', 'date', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
-            'vaccine_id' => ['required', 'int', 'max:255', 'unique:'.Dependent::class],
+            'vaccine_id' => ['required', 'int', 'max:255'],
         ]);
-       
-        $user = Dependent::create([
-            'name' => $request->name,
-            'last_name' => $request->last_name,
-            'cpf' => $request->cpf,
-            'birth_date' => $request->birth_date,
-            'phone' => $request->phone,
-            'vaccine_id' => $request->vaccine_id,
-            'employee_id' => Auth::user()->id,
-            'is_active' => 1,
-        ]);
-
-        return redirect(RouteServiceProvider::HOME);
+    
+        try {
+            $user = Dependent::create([
+                'name' => $request->name,
+                'last_name' => $request->last_name,
+                'cpf' => $request->cpf,
+                'birth_date' => $request->birth_date,
+                'phone' => $request->phone,
+                'vaccine_id' => $request->vaccine_id,
+                'employee_id' => Auth::user()->id,
+                'is_active' => 1,
+            ]);
+    
+            return redirect(RouteServiceProvider::HOME)->with('status', 'Dependente cadastrado com sucesso!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
     }
 }

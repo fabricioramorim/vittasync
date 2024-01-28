@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('dependents', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('last_name')->unique();
+            $table->string('name');
+            $table->string('last_name');
             $table->string('cpf')->unique();
-            $table->string('birth_date')->unique();
-            $table->string('phone')->unique();
-            $table->string('vaccine_id')->unique();
-            $table->string('employee_id')->unique();
-            $table->string('is_active')->unique();
+            $table->string('birth_date');
+            $table->string('phone');
+            $table->string('vaccine_id');
+            $table->string('employee_id');
+            $table->string('is_active');
             $table->timestamps();
         });
     }
