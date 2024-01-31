@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -12,12 +13,21 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+
+    public readonly Access $access;
+
+    public function __construct()
+    {
+        $this->access = new Access();
+    }
     /**
      * Display the login view.
      */
     public function create(): View
     {
-        return view('auth.login');
+        $access = Access::all();
+
+        return view('auth.login', compact('access'));
     }
 
     /**

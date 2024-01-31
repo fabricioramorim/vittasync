@@ -29,6 +29,7 @@ class DependentController extends Controller
         $dependent = Dependent::where('employee_id', $userId)
             ->orderBy('created_at', 'DESC')
             ->get();
+
         return view('dependents', compact('dependent'));
     
     }
