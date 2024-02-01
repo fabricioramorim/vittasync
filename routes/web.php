@@ -24,13 +24,10 @@ Route::get('/200ceb26807d6bf99fd6f4f0d1ca54d4', function () {
     return view('administrator');
 })->middleware(['auth', 'verified'])->name('administrator');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    
 });
 
 require __DIR__.'/auth.php';
