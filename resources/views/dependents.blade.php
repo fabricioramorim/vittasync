@@ -2,39 +2,74 @@
 
     <!-- Header -->
     <x-slot name="header">
+
         <h2
             class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight flex justify-between ml-1 mr-2 items-center">
             {{ __('VittaSync - Dependentes') }}
-            
-            <button onclick="document.getElementById('static-modal').classList.add('hidden')" type="button"
-            class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:green-blue-800">Compreendo</button>
-            
-            <button onclick="document.getElementById('static-modal').classList.add('hidden')" type="button"
-            class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:green-blue-800">Compreendo</button>
-   
-            <a data-modal-target="registerD-modal" data-modal-toggle="registerD-modal"
-                class="cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                <span
-                    class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
-                    <div class="inline-flex items-center align-middle">
+            <div class="grid grid-cols-6 grid-rows-1  items-center">
+                @php
+                    $access = new \Carbon\Carbon($access->where('id', 1)->get('date_access'));
+                @endphp
+                @if ($access >= \Carbon\Carbon::now()->subDays(7))
+                    @if (Auth::user()->vaccin_confirm == 0)
+                        <div class="col-end-4 col-span-2">
+                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                
+                                <input type="hidden" name="vaccin_confirm" value="1">
+                                <button type="submit"
+                                    class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
+                                    Vacinação</button>
+                            </form>
+                        </div>
 
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-4 h-4 me-2">
-                            <path
-                                d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                        </svg>
+                        <div class="col-end-6 col-span-2">
+                            <a data-modal-target="registerD-modal" data-modal-toggle="registerD-modal"
+                                class="cursor-pointer relative inline-flex items-center justify-center p-0.5 me-4 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                <span
+                                    class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
+                                    <div class="inline-flex items-center align-middle">
+    
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="w-4 h-4 me-2">
+                                            <path
+                                                d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                        </svg>
+    
+                                        {{ __('Incluir Dependente') }}
+                                    </div>
+                                </span>
+                            </a>
+                        </div>
+                    @else
+                        <div class="col-end-6 col-span-2">
+                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}" method="POST">
+                                @csrf
+                                @method('PUT')
 
-                        {{ __('Novo Dependente') }}
-                    </div>
-                </span>
-            </a>
-            
+                                <input type="hidden" name="vaccin_confirm" value="0">
+                                <button type="submit"
+                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Desfazer
+                                    Confirmação</button>
+                            </form>
+                        </div>
+                    @endif
+
+                    
+                @endif
+                <div class="col-end-8 col-span-2 mb-1">
+                    <a href="{{ asset('bula_vaxigrip_tetra.pdf') }}" download="bula_vaxigrip_tetra.pdf"
+                        class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Baixar
+                        Bula</a>
+                </div>
+            </div>
         </h2>
     </x-slot>
 
     <!-- Alert message from controller store -->
     @if (session()->has('message') && session()->get('type') == 'danger')
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show">
+        <div x-data="{ show: true }" x-init="ssetTimeout(() => show = false, 5000)" x-show="show">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
                 <div role="alert">
                     <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
@@ -65,7 +100,7 @@
         </div>
     @endif
 
-    <!-- Alert top 
+    <!-- Alert top -->
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-8">
         <div role="alert">
             <div class="bg-yellow-500 text-white font-bold rounded-t px-4 py-2">
@@ -76,7 +111,7 @@
                 {{ __('A vacina aplicada será descontada em folha de pagamento.') }}
             </div>
         </div>
-    </div>-->
+    </div>
 
     <!-- List of dependents -->
     <div class="grid grid-cols-3 gap-4 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
@@ -88,9 +123,10 @@
                     <div class="p-6">
                         <div class="grid grid-rows-3 grid-flow-col gap-4">
                             <div class="w-20 h-20 row-span-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="60" fill="currentColor"
+                                    viewBox="0 -960 960 960" width="60">
                                     <path
-                                        d="M192 0c13.3 0 24 10.7 24 24V37.5c0 35.6 43.1 53.5 68.3 28.3l9.5-9.5c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-9.5 9.5C293 124.9 310.9 168 346.5 168H360c13.3 0 24 10.7 24 24s-10.7 24-24 24H346.5c-35.6 0-53.5 43.1-28.3 68.3l9.5 9.5c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-9.5-9.5C259.1 293 216 310.9 216 346.5V360c0 13.3-10.7 24-24 24s-24-10.7-24-24V346.5c0-35.6-43.1-53.5-68.3-28.3l-9.5 9.5c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l9.5-9.5C91 259.1 73.1 216 37.5 216H24c-13.3 0-24-10.7-24-24s10.7-24 24-24H37.5c35.6 0 53.5-43.1 28.3-68.3l-9.5-9.5c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l9.5 9.5C124.9 91 168 73.1 168 37.5V24c0-13.3 10.7-24 24-24zm48 224a16 16 0 1 0 0-32 16 16 0 1 0 0 32zm-48-64a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm320 80c0 33 39.9 49.5 63.2 26.2c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6C574.5 312.1 591 352 624 352c8.8 0 16 7.2 16 16s-7.2 16-16 16c-33 0-49.5 39.9-26.2 63.2c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0C551.9 446.5 512 463 512 496c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-33-39.9-49.5-63.2-26.2c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6C417.5 423.9 401 384 368 384c-8.8 0-16-7.2-16-16s7.2-16 16-16c33 0 49.5-39.9 26.2-63.2c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0C440.1 289.5 480 273 480 240c0-8.8 7.2-16 16-16s16 7.2 16 16zm0 112a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+                                        d="m320-60-80-60v-160h-40q-33 0-56.5-23.5T120-360v-300q-17 0-28.5-11.5T80-700q0-17 11.5-28.5T120-740h120v-60h-20q-17 0-28.5-11.5T180-840q0-17 11.5-28.5T220-880h120q17 0 28.5 11.5T380-840q0 17-11.5 28.5T340-800h-20v60h120q17 0 28.5 11.5T480-700q0 17-11.5 28.5T440-660v300q0 33-23.5 56.5T360-280h-40v220ZM200-360h160v-60h-70q-12 0-21-9t-9-21q0-12 9-21t21-9h70v-60h-70q-12 0-21-9t-9-21q0-12 9-21t21-9h70v-60H200v300ZM600-80q-33 0-56.5-23.5T520-160v-260q0-29 10-48t21-33q11-14 20-22.5t9-16.5v-20q-17 0-28.5-11.5T540-600q0-17 11.5-28.5T580-640h200q17 0 28.5 11.5T820-600q0 17-11.5 28.5T780-560v20q0 8 10 18t22 24q11 14 19.5 33t8.5 45v260q0 33-23.5 56.5T760-80H600Zm0-320h160v-20q0-15-9-26t-20-24q-11-13-21-29t-10-41v-20h-40v20q0 24-9.5 40T630-471q-11 13-20.5 24.5T600-420v20Zm0 120h160v-60H600v60Zm0 120h160v-60H600v60Zm0-120h160-160Z" />
                                 </svg>
                             </div>
 
@@ -137,25 +173,29 @@
 
                     </div>
 
-                    <div class="p-6 pt-0">
-                        <a data-modal-target="editD-modal?id={{ $rs->id }}"
-                            data-modal-toggle="editD-modal?id={{ $rs->id }}"
-                            class="cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                            <span
-                                class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
-                                <div class="inline-flex items-center align-middle">
+                    @if ($access >= \Carbon\Carbon::now()->subDays(7))
+                        @if (Auth::user()->vaccin_confirm == 0)
+                            <div class="p-6 pt-0">
+                                <a data-modal-target="editD-modal?id={{ $rs->id }}"
+                                    data-modal-toggle="editD-modal?id={{ $rs->id }}"
+                                    class="cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                    <span
+                                        class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
+                                        <div class="inline-flex items-center align-middle">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        class="w-4 h-4 me-2">
-                                        <path
-                                            d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                    </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor" class="w-4 h-4 me-2">
+                                                <path
+                                                    d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                            </svg>
 
-                                    {{ __('Editar Dependente') }}
-                                </div>
-                            </span>
-                        </a>
-                    </div>
+                                            {{ __('Editar Dependente') }}
+                                        </div>
+                                    </span>
+                                </a>
+                            </div>
+                        @endif
+                    @endif
                 </div>
             @endforeach
 
@@ -456,18 +496,15 @@
 
 
     <script>
-        // Exibir modal somente na primeira vez que o usuário acessar a página
-
-        
         document.addEventListener('DOMContentLoaded', function() {
             if (!localStorage.getItem('modalShown')) {
                 document.getElementById('static-modal').classList.remove('hidden');
                 //adiciona a centralizacao do modal
-                document.getElementById('static-modal').classList.add('flex');  
+                document.getElementById('static-modal').classList.add('flex');
                 //adiciona o efeito de fundo escuro
-                document.getElementById('static-modal').classList.add('bg-gray-900');   
+                document.getElementById('static-modal').classList.add('bg-gray-900');
                 //adiciona o efeito de opacidade
-                document.getElementById('static-modal').classList.add('bg-opacity-70'); 
+                document.getElementById('static-modal').classList.add('bg-opacity-70');
                 localStorage.setItem('modalShown', true);
             }
         });

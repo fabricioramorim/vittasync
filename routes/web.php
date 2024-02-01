@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Query\UnitController;
 use App\Http\Controllers\Query\DependentController;
+use App\Http\Controllers\Query\AccessController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+Route::get('/', [AccessController::class, 'index'])
+->name('login');
 
 Route::get('/200ceb26807d6bf99fd6f4f0d1ca54d4', function () {
     return view('administrator');

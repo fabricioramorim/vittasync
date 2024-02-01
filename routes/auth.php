@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
+    Route::put('register/{confirm}', [RegisteredUserController::class, 'confirm'])
+                ->name('register.confirm');
+
 
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');

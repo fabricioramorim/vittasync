@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Query;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dependent;
+use App\Models\Access;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -30,7 +31,9 @@ class DependentController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        return view('dependents', compact('dependent'));
+        $access = Access::orderBy('date_access', 'DESC')->get();
+
+        return view('dependents', compact('dependent', 'access'));
     
     }
 
@@ -82,4 +85,5 @@ class DependentController extends Controller
 
         return redirect()->back()->with('message', 'Erro ao atualizar dependente!')->with('type', 'danger');
     }
+    
 }

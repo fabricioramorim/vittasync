@@ -54,18 +54,18 @@
                     </h3>
                 </div>
                 <!-- Modal body -->
+                @if ($access->count() > 0)
+                @foreach ($access as $rs)
                 <div class="p-4 md:p-5 space-y-4">
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        With less than a month to go before the European Union enacts new consumer privacy laws for its
-                        citizens, companies around the world are updating their terms of service agreements to comply.
+                        Informamos que, a partir de {{ \Carbon\Carbon::parse($rs->date_access)->format('d/m/Y') }}, suas permissões de acesso ao sistema serão alteradas. Você terá apenas acesso para visualizar os dados, mas não poderá mais editar ou criar novos registros.
                     </p>
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25
-                        and is meant to ensure a common set of data rights in the European Union. It requires
-                        organizations to notify users as soon as possible of high-risk data breaches that could
-                        personally affect them.
+                        Essa alteração é necessária para garantir a segurança dos dados e a conformidade com as políticas internas da empresa.
                     </p>
                 </div>
+                @endforeach
+                @endif
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button onclick="document.getElementById('static-modal').classList.add('hidden')" type="button"
@@ -81,6 +81,11 @@
             document.getElementById('static-modal').classList.remove('hidden');
             //adiciona a centralizacao do modal
             document.getElementById('static-modal').classList.add('flex');
+            //adiciona o efeito de fundo escuro
+            document.getElementById('static-modal').classList.add('bg-gray-900');
+            //adiciona o efeito de opacidade
+            document.getElementById('static-modal').classList.add('bg-opacity-70');
+            localStorage.setItem('modalShown', true);
         });
     </script>
 
