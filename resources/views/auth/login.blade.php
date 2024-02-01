@@ -84,7 +84,8 @@
             //adiciona o efeito de fundo escuro
             document.getElementById('static-modal').classList.add('bg-gray-900');
             //adiciona o efeito de opacidade
-            document.getElementById('static-modal').classList.add('bg-opacity-70');
+            document.getElementById('static-modal').classList.add('bg-opacity-50');
+            
             localStorage.setItem('modalShown', true);
         });
     </script>

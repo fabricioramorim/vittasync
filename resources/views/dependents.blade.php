@@ -13,10 +13,11 @@
                 @if ($access >= \Carbon\Carbon::now()->subDays(7))
                     @if (Auth::user()->vaccin_confirm == 0)
                         <div class="col-end-4 col-span-2">
-                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}" method="POST">
+                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
+                                method="POST">
                                 @csrf
                                 @method('PUT')
-                                
+
                                 <input type="hidden" name="vaccin_confirm" value="1">
                                 <button type="submit"
                                     class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
@@ -30,13 +31,13 @@
                                 <span
                                     class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
                                     <div class="inline-flex items-center align-middle">
-    
+
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                             class="w-4 h-4 me-2">
                                             <path
                                                 d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
                                         </svg>
-    
+
                                         {{ __('Incluir Dependente') }}
                                     </div>
                                 </span>
@@ -44,7 +45,8 @@
                         </div>
                     @else
                         <div class="col-end-6 col-span-2">
-                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}" method="POST">
+                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
+                                method="POST">
                                 @csrf
                                 @method('PUT')
 
@@ -56,7 +58,6 @@
                         </div>
                     @endif
 
-                    
                 @endif
                 <div class="col-end-8 col-span-2 mb-1">
                     <a href="{{ asset('bula_vaxigrip_tetra.pdf') }}" download="bula_vaxigrip_tetra.pdf"
@@ -66,6 +67,8 @@
             </div>
         </h2>
     </x-slot>
+
+    
 
     <!-- Alert message from controller store -->
     @if (session()->has('message') && session()->get('type') == 'danger')
@@ -89,7 +92,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
                 <div role="alert">
                     <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
-                        Erro
+                        Sucesso
                     </div>
                     <div
                         class="border border-t-0 border-green-400 rounded-b bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100">
@@ -99,8 +102,64 @@
             </div>
         </div>
     @endif
+    <div class="grid grid-cols-2 gap-4 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
 
-    <!-- Alert top -->
+        <div
+            class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
+            <div class="p-6 ">
+                
+                <h5
+                    class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
+                    {{ __('Doses a serem vacinadas') }}
+                </h5>
+                <p class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
+                    
+                    @php
+                        $dateD = date('Y-m-d', strtotime('-9 years'));
+                        $totalVaccinIds = 0;
+
+                        foreach ($dependent as $rs) {
+                            if ($rs->birth_date >= $dateD && $rs->vaccine_id == 1) {
+                                $totalVaccinIds = $totalVaccinIds + 2;
+                            }
+                        }
+                        foreach ($dependent as $rs) {
+                            if ($rs->birth_date < $dateD && $rs->vaccine_id == 1) {
+                                $totalVaccinIds = $totalVaccinIds + 1;
+                            }
+                        }                            
+                    @endphp
+
+                    Total de doses: {{ $totalVaccinIds + 1}}
+
+                </p>
+            </div>
+        </div>
+        <div
+            class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl">
+            <div class="p-6 ">
+                
+                <h5
+                    class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
+                    {{ __('Endereço de vacinação') }}
+                </h5>
+                <div class="mt-4 ">
+                    <select name="unit_id" id="unit_id" class="block mt-1 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @if($unit->count() > 0)
+                            @foreach($unit as $rs)
+                                <option value="{{ $rs->id }}">{{ $rs->name }}</option>
+                            @endforeach
+                        @else
+                            <option value="0">Unidades não encontradas</option>
+                        @endif
+                    </select>
+                    <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- Alert top 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-8">
         <div role="alert">
             <div class="bg-yellow-500 text-white font-bold rounded-t px-4 py-2">
@@ -111,7 +170,7 @@
                 {{ __('A vacina aplicada será descontada em folha de pagamento.') }}
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!-- List of dependents -->
     <div class="grid grid-cols-3 gap-4 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
@@ -119,7 +178,7 @@
         @if ($dependent->count() > 0)
             @foreach ($dependent as $rs)
                 <div
-                    class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl w-96">
+                    class="relative flex flex-col text-gray-700 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl w-96">
                     <div class="p-6">
                         <div class="grid grid-rows-3 grid-flow-col gap-4">
                             <div class="w-20 h-20 row-span-3">
@@ -175,24 +234,36 @@
 
                     @if ($access >= \Carbon\Carbon::now()->subDays(7))
                         @if (Auth::user()->vaccin_confirm == 0)
-                            <div class="p-6 pt-0">
-                                <a data-modal-target="editD-modal?id={{ $rs->id }}"
-                                    data-modal-toggle="editD-modal?id={{ $rs->id }}"
-                                    class="cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                                    <span
-                                        class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
-                                        <div class="inline-flex items-center align-middle">
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor" class="w-4 h-4 me-2">
-                                                <path
-                                                    d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                            </svg>
-
-                                            {{ __('Editar Dependente') }}
-                                        </div>
-                                    </span>
-                                </a>
+                            <div class="grid grid-cols-4 gap-14">
+                                <div class="p-6 pt-0 col-span-3">
+                                    <a data-modal-target="editD-modal?id={{ $rs->id }}"
+                                        data-modal-toggle="editD-modal?id={{ $rs->id }}"
+                                        class="cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                        <span
+                                            class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
+                                            <div class="inline-flex items-center align-middle">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 me-2">
+                                                    <path
+                                                        d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                                </svg>
+                                                {{ __('Editar Dependente') }}
+                                            </div>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col-span-1 mt-2">
+                                    <!-- Delete button with icon open modal id="deleteD-modal?id={{ $rs->id }}"-->
+                                    <a data-modal-target="deleteD-modal?id={{ $rs->id }}"
+                                        data-modal-toggle="deleteD-modal?id={{ $rs->id }}">
+                                        <span>
+                                            <div class="inline-flex items-end align-middle">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="30" fill="#EF0000" viewBox="0 -960 960 960" width="30">
+                                                    <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                                                </svg>
+                                            </div>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         @endif
                     @endif
@@ -219,8 +290,8 @@
                         data-modal-toggle="registerD-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Fechar</span>
                     </button>
@@ -433,15 +504,19 @@
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-md max-h-full">
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <form action="{{ route('dashboard.destroy', ['dependent' => $rs->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
                         <button type="button"
                             class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="popup-modal">
+                            data-modal-hide="deleteD-modal?id={{ $rs->id }}">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                             </svg>
-                            <span class="sr-only">Close modal</span>
+                            <span class="sr-only">Fechar</span>
                         </button>
                         <div class="p-4 md:p-5 text-center">
                             <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
@@ -449,25 +524,23 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want
-                                to delete this product?</h3>
-                            <button data-modal-hide="popup-modal" type="button"
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Tem certeza que deseja excluir esse dependente?</h3>
+                            <button data-modal-hide="deleteD-modal?id={{ $rs->id }}" type="submit"
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                                Yes, I'm sure
+                                Sim, estou certo disso!
                             </button>
-                            <button data-modal-hide="popup-modal" type="button"
-                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
-                                cancel</button>
+                            <button data-modal-hide="deleteD-modal?id={{ $rs->id }}" type="button"
+                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Não,
+                                Cancelar</button>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>
         @endforeach
     @endif
 
-
-
-    <!-- Modal Aviso-->
+    <!-- Modal Termos-->
     <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -476,37 +549,43 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Atenção!
+                        Termos de uso e privacidade.
                     </h3>
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4">
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        {{ __('A vacina aplicada será descontada em folha de pagamento.') }}
+                        Ao prosseguir, você concorda com os <a href="https://vacivitta.com.br/termos-de-uso/" target="_blank" class="text-blue-500 hover:underline">termos de uso</a>
+                        e a <a href="https://vacivitta.com.br/politica-de-privacidade/" target="_blank" class="text-blue-500 hover:underline">política de privacidade</a> do sistema.
                     </p>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button onclick="document.getElementById('static-modal').classList.add('hidden')" type="button"
-                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:green-blue-800">Compreendo</button>
+                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:green-blue-800">Aceite</button>
                 </div>
             </div>
         </div>
     </div>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!localStorage.getItem('modalShown')) {
-                document.getElementById('static-modal').classList.remove('hidden');
-                //adiciona a centralizacao do modal
-                document.getElementById('static-modal').classList.add('flex');
-                //adiciona o efeito de fundo escuro
-                document.getElementById('static-modal').classList.add('bg-gray-900');
-                //adiciona o efeito de opacidade
-                document.getElementById('static-modal').classList.add('bg-opacity-70');
-                localStorage.setItem('modalShown', true);
+        @php
+            $modalShown = session('modalShown');
+            if (!$modalShown) {
+                session(['modalShown' => true]);
+        @endphp
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('static-modal').classList.remove('hidden');
+                    //adiciona a centralizacao do modal
+                    document.getElementById('static-modal').classList.add('flex');
+                    //adiciona o efeito de fundo escuro
+                    document.getElementById('static-modal').classList.add('bg-gray-900');
+                    //adiciona o efeito de opacidade
+                    document.getElementById('static-modal').classList.add('bg-opacity-70');
+                    localStorage.setItem('modalShown', true);
+                });
+        @php
             }
-        });
+        @endphp
     </script>
 </x-app-layout>

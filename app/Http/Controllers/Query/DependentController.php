@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Query;
 use App\Http\Controllers\Controller;
 use App\Models\Dependent;
 use App\Models\Access;
+use App\Models\Unit;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -17,6 +18,14 @@ use Illuminate\View\View;
 class DependentController extends Controller
 {
 
+    /**
+     * Display the registration view.
+     */
+    public function create(): View
+    {
+        $unit = Unit::orderBy('created_at', 'DESC')->get();
+        return view('auth.register', compact('unit'));
+    }
     public readonly Dependent $dependent;
 
     public function __construct()
@@ -33,7 +42,9 @@ class DependentController extends Controller
 
         $access = Access::orderBy('date_access', 'DESC')->get();
 
-        return view('dependents', compact('dependent', 'access'));
+        $unit = Unit::orderBy('created_at', 'DESC')->get();
+
+        return view('dependents', compact('dependent', 'access', 'unit'));
     
     }
 
@@ -84,6 +95,17 @@ class DependentController extends Controller
         }
 
         return redirect()->back()->with('message', 'Erro ao atualizar dependente!')->with('type', 'danger');
+    }
+
+    public function destroy(string $id)
+    {
+        $deleted = $this->dependent->where('id', $id)->delete();
+
+        if ($deleted) {
+            return redirect()->back()->with('message', 'Dependente excluído com sucesso!')->with('type', 'success');
+        }
+
+        return redirect()->back()->with('message', 'Erro ao excluir dependente!')->with('type', 'danger');
     }
     
 }
