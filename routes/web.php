@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Kernel;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Query\UnitController;
 use App\Http\Controllers\Query\DependentController;
