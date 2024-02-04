@@ -13,16 +13,9 @@
                 @if ($access >= \Carbon\Carbon::now()->subDays(7))
                     @if (Auth::user()->vaccin_confirm == 0)
                         <div class="col-end-4 col-span-2">
-                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
-                                method="POST">
-                                @csrf
-                                @method('PUT')
-
-                                <input type="hidden" name="vaccin_confirm" value="1">
-                                <button type="submit"
-                                    class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
-                                    Vacinação</button>
-                            </form>
+                                <a type="submit" data-modal-target="confirmD-modal" data-modal-toggle="confirmD-modal"
+                                    class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
+                                    Vacinação</a>
                         </div>
 
                         <div class="col-end-6 col-span-2">
@@ -45,16 +38,10 @@
                         </div>
                     @else
                         <div class="col-end-6 col-span-2">
-                            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
-                                method="POST">
-                                @csrf
-                                @method('PUT')
-
-                                <input type="hidden" name="vaccin_confirm" value="0">
-                                <button type="submit"
-                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Desfazer
-                                    Confirmação</button>
-                            </form>
+                                <a data-modal-target="unconfirmD-modal"
+                                    data-modal-toggle="unconfirmD-modal"
+                                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Desfazer
+                                    Confirmação</a>
                         </div>
                     @endif
 
@@ -102,7 +89,8 @@
             </div>
         </div>
     @endif
-    <div class="grid grid-cols-2 gap-4 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+
+    <div class="grid grid-cols-2 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
 
         <div
             class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
@@ -252,11 +240,11 @@
                                     </a>
                                 </div>
                                 <div class="col-span-1 mt-2">
-                                    <!-- Delete button with icon open modal id="deleteD-modal?id={{ $rs->id }}"-->
+                                    <!-- Delete button with icon open modal -->
                                     <a data-modal-target="deleteD-modal?id={{ $rs->id }}"
                                         data-modal-toggle="deleteD-modal?id={{ $rs->id }}">
                                         <span>
-                                            <div class="inline-flex items-end align-middle">
+                                            <div class="inline-flex items-end align-middle cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="30" fill="#EF0000" viewBox="0 -960 960 960" width="30">
                                                     <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                                                 </svg>
@@ -540,6 +528,92 @@
         @endforeach
     @endif
 
+
+    <!-- Unonfirm D modal -->
+   
+            <div id="unconfirmD-modal" tabindex="-1"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
+                            method="POST">
+                            @csrf
+                            @method('PUT')
+
+                        <input type="hidden" name="vaccin_confirm" value="0">
+                        <button type="button"
+                            class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="unconfirmD-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Fechar</span>
+                        </button>
+                        <div class="p-4 md:p-5 text-center">
+                            <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Tem certeza que deseja cancelar a confirmação?</h3>
+                            <button data-modal-hide="unconfirmD-modal" type="submit"
+                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                Sim, estou certo disso!
+                            </button>
+                            <button data-modal-hide="unconfirmD-modal" type="button"
+                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Não,
+                                Cancelar</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+  
+    <!-- Confirm D modal -->
+   
+    <div id="confirmD-modal" tabindex="-1"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
+                method="POST">
+                @csrf
+                @method('PUT')
+
+            <input type="hidden" name="vaccin_confirm" value="1">
+            <button type="button"
+                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="confirmD-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span class="sr-only">Fechar</span>
+            </button>
+            <div class="p-4 md:p-5 text-center">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses serão descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Total de doses: {{ $totalVaccinIds + 1}}</h3>
+                <button data-modal-hide="confirmD-modal" type="submit"
+                    class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                    Sim, estou certo disso!
+                </button>
+                <button data-modal-hide="confirmD-modal" type="button"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Não,
+                    Cancelar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
     <!-- Modal Termos-->
     <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -562,7 +636,7 @@
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button onclick="document.getElementById('static-modal').classList.add('hidden')" type="button"
-                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:green-blue-800">Aceite</button>
+                        class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:green-blue-800">Aceito</button>
                 </div>
             </div>
         </div>

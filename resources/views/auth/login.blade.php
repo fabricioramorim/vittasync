@@ -7,17 +7,17 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="registration" :value="__('Matrícula')" />
-            <x-text-input id="registration" class="block mt-1 w-full" type="text" name="registration" :value="old('registration')"
+            <x-input-label for="registration" :value="__('Matrícula')" class="dark:text-gray-600"/>
+            <x-text-input id="registration" class="block mt-1 w-full dark:bg-white dark:border-gray-300" type="text" name="registration" :value="old('registration')"
                 required autofocus autocomplete="registration" />
             <x-input-error :messages="$errors->get('registration')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Senha')" />
+            <x-input-label for="password" :value="__('Senha')" class="dark:text-gray-600"/>
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+            <x-text-input id="password" class="block mt-1 w-full dark:bg-white dark:border-gray-300" type="password" name="password" required
                 autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -27,14 +27,14 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox"
-                    class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
+                    class="rounded dark:bg-white border-gray-300 dark:border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-500 dark:focus:ring-offset-white"
                     name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Lembre-me') }}</span>
+                <span class="ms-2 text-sm text-gray-600 dark:text-gray-600">{{ __('Lembre-me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-3 dark:hover:bg-gray-700">
                 {{ __('Entrar') }}
             </x-primary-button>
         </div>
@@ -43,7 +43,7 @@
 
     <!-- Modal Aviso-->
     <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full md:inset-0 max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
