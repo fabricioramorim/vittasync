@@ -17,6 +17,7 @@ class Dependent extends Model
         'phone',
         'vaccine_id',
         'employee_id',
+        'unit_id',
         'is_active',
     ];
 

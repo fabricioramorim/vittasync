@@ -73,6 +73,7 @@ class DependentController extends Controller
                 'phone' => $request->phone,
                 'vaccine_id' => $request->vaccine_id,
                 'employee_id' => Auth::user()->id,
+                'unit_id' => Auth::user()->unit_id,
                 'is_active' => 1,
             ]);
         } catch (QueryException $e) {

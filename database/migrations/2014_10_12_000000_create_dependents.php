@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('vaccine_id');
             $table->string('employee_id');
+            $table->string('unit_id');
             $table->string('is_active');
             $table->timestamps();
         });
