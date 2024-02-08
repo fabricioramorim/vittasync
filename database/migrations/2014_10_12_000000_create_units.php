@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('path')->nullable();
+            $table->string('city')->nullable();
             $table->string('is_active')->default('1');
             $table->rememberToken();
             $table->timestamps();

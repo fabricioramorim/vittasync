@@ -83,6 +83,9 @@ class RegisteredUserController extends Controller
         '_token', 
         '_method',        
         'name',
+        'last_name',
+        'cpf',
+        'birth_date',
         'registration',
         'phone',
         'cep',
@@ -105,4 +108,5 @@ class RegisteredUserController extends Controller
             return redirect()->back()->with('message', 'Erro na confirmação!')->with('type', 'danger');
         }
     }
+
 }

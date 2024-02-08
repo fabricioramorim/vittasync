@@ -11,7 +11,7 @@ class Unit extends Model
 
     protected $fillable = [
         'name',
-        'path',
+        'city',
         'is_active',
     ];
 

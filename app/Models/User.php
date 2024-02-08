@@ -19,6 +19,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'cpf',
+        'birth_date',
         'registration',
         'phone',
         'cep',
@@ -26,6 +29,7 @@ class User extends Authenticatable
         'number',
         'is_admin',
         'is_active',
+        'vaccine_id',
         'vaccin_confirm',
         'unit_id',
         'email',

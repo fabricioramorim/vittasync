@@ -14,7 +14,6 @@ class Dependent extends Model
         'last_name',
         'cpf',
         'birth_date',
-        'phone',
         'vaccine_id',
         'employee_id',
         'unit_id',

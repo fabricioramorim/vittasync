@@ -9,11 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('last_name');
+            $table->string('cpf')->unique();
+            $table->string('birth_date');
             $table->string('registration')->unique();
             $table->string('phone');
             $table->string('cep');
@@ -21,6 +25,7 @@ return new class extends Migration
             $table->string('number');
             $table->string('is_admin')->default('0');
             $table->string('is_active')->default('1');
+            $table->string('vaccine_id')->default('2');
             $table->string('vaccin_confirm')->default('0');
             $table->string('unit_id')->default('0');
             $table->string('email');

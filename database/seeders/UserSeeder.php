@@ -15,10 +15,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-         // Initial user
-         DB::table('users')->insert([
+       // Users seeder
+       $users = [
+        [
             'id' => '0',
-            'name' => 'Fabricio Amorim',
+            'name' => 'Fabricio',
+            'last_name' => 'Amorim',
+            'cpf' => '12345678901',
+            'birth_date' => '1980-01-01',
             'registration' => '2671',
             'phone' => '+5511953704921',
             'cep' => '06766200',
@@ -26,86 +30,38 @@ class UserSeeder extends Seeder
             'number' => '100',
             'is_admin' => '0',
             'is_active' => '1',
+            'vaccine_id' => '2',
             'vaccin_confirm' => '0',
             'unit_id' => '1',
             'email' => 'contato@fabrioceras.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-        ]);
+        ],
+        
+        [
+            'id' => '6',
+            'name' => 'Edneia',
+            'last_name' => 'de Fatima Siqueira Maciel',
+            'cpf' => '396.897.488-31',
+            'birth_date' => '1991-03-14',
+            'registration' => '482964',
+            'phone' => '+5511953704921',
+            'cep' => '06766200',
+            'address' => 'Rua João de Barros, 100',
+            'number' => '100',
+            'is_admin' => '99',
+            'is_active' => '1',
+            'vaccine_id' => '2',
+            'vaccin_confirm' => '0',
+            'unit_id' => '1',
+            'email' => 'contato@fabrioceras.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('482964'),
+            'remember_token' => Str::random(10),
+        ]
+    ];
 
-        // Add 5 more users with unique data
-        $users = [
-            [
-                'id' => '2',
-                'name' => 'Fabricio Amorim',
-                'registration' => '2672',
-                'phone' => '+5511953704921',
-                'cep' => '06766200',
-                'address' => 'Rua João de Barros, 100',
-                'number' => '100',
-                'is_admin' => '0',
-                'is_active' => '1',
-                'vaccin_confirm' => '0',
-                'unit_id' => '1',
-                'email' => 'contato@fabrioceras.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'remember_token' => Str::random(10),
-            ],
-            [
-                'id' => '3',
-                'name' => 'Fabricio Amorim',
-                'registration' => '2673',
-                'phone' => '+5511953704921',
-                'cep' => '06766200',
-                'address' => 'Rua João de Barros, 100',
-                'number' => '100',
-                'is_admin' => '0',
-                'is_active' => '1',
-                'vaccin_confirm' => '0',
-                'unit_id' => '1',
-                'email' => 'contato@fabrioceras.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'remember_token' => Str::random(10),
-            ],
-            [
-                'id' => '4',
-                'name' => 'Fabricio Amorim',
-                'registration' => '1672',
-                'phone' => '+5511953704921',
-                'cep' => '06766200',
-                'address' => 'Rua João de Barros, 100',
-                'number' => '100',
-                'is_admin' => '1',
-                'is_active' => '1',
-                'vaccin_confirm' => '0',
-                'unit_id' => '1',
-                'email' => 'contato@fabrioceras.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'remember_token' => Str::random(10),
-            ],
-            [
-                'id' => '5',
-                'name' => 'Fabricio Amorim',
-                'registration' => '99672',
-                'phone' => '+5511953704921',
-                'cep' => '06766200',
-                'address' => 'Rua João de Barros, 100',
-                'number' => '100',
-                'is_admin' => '99',
-                'is_active' => '1',
-                'vaccin_confirm' => '0',
-                'unit_id' => '1',
-                'email' => 'contato@fabrioceras.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'remember_token' => Str::random(10),
-            ]
-        ];
-
-        DB::table('users')->insert($users);
+    DB::table('users')->insert($users);
     }
 }
