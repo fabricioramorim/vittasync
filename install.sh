@@ -47,10 +47,6 @@ echo "Iniciando Sail"
 sleep 10
 
 echo "Finalizando as dependencias do software"
-./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && ./vendor/bin/sail up -d
-
-sleep 10
-
-./vendor/bin/sail php artisan migrate && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build && newgrp docker
+./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && ./vendor/bin/sail up -d && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build && ./vendor/bin/sail php artisan migrate && newgrp docker
 
 END
