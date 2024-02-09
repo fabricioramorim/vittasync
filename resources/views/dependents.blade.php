@@ -701,21 +701,6 @@
     </div>
 
     <script>
-        @php
-            $modalShown = session('modalShown');
-            if (!$modalShown && !localStorage.getItem('modalShown')) {
-                session(['modalShown' => true]);
-                document.addEventListener('DOMContentLoaded', function () {
-                        document.getElementById('static-modal').classList.remove('hidden');
-                        //adiciona a centralizacao do modal
-                        document.getElementById('static-modal').classList.add('flex');
-                        //adiciona o efeito de fundo escuro
-                        document.getElementById('static-modal'). classList.add('bg-gray-900');
-                        //adiciona o efeito de opacidade
-                        document.getElementById('static-modal').classList.add('bg-opacity-70');
-                        localStorage.setItem('modalShown', true);
-                    });
-            }
-        @endphp
+        
     </script>
 </x-app-layout>
