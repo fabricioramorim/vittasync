@@ -47,6 +47,16 @@ echo "Iniciando Sail"
 sleep 10
 
 echo "Finalizando as dependencias do software"
-./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && ./vendor/bin/sail up -d && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build && ./vendor/bin/sail php artisan migrate && newgrp docker
+./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && ./vendor/bin/sail up -d && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build 
 
+# espera 30 segundos
+sleep 30 
+
+echo "Migrando o banco de dados"
+./vendor/bin/sail php artisan migrate 
+
+echo "Populando o banco de dados"
+./vendor/bin/sail php artisan db:seed
+ 
+newgrp docker
 END
