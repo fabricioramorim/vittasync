@@ -44,6 +44,8 @@ docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd):/var/www/html" -w /var/www/htm
 echo "Iniciando Sail"
 ./vendor/bin/sail up -d
 
+sleep 10
+
 echo "Finalizando as dependencias do software"
 ./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && ./vendor/bin/sail up -d
 
