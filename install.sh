@@ -49,7 +49,6 @@ echo "Finalizando as dependencias do software"
 
 sleep 10
 
-./vendor/bin/sail php artisan migrate && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
+./vendor/bin/sail php artisan migrate && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build && newgrp docker
 
-newgrp docker
 END
