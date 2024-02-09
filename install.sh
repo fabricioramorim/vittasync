@@ -52,7 +52,7 @@ print_footer "Iniciando Sail"
 ./vendor/bin/sail up -d
 
 print_footer "Finalizando as dependencias do software"
-./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && ./vendor/bin/sail up -d && ./vendor/bin/sail php artisan migrate && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
+./vendor/bin/sail php artisan key:generate && ./vendor/bin/sail php artisan sail:install && docker-compose down --volumes && sleep 10 && ./vendor/bin/sail up -d && ./vendor/bin/sail php artisan migrate && ./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
 
 newgrp docker
 END
