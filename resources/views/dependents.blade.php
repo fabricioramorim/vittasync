@@ -12,30 +12,12 @@
                 @endphp
                 @if ($access >= \Carbon\Carbon::now()->subDays(7))
                     @if (Auth::user()->vaccin_confirm == 0)
-                        <div class="col-end-4 col-span-2">
+                        <div class="col-end-6 col-span-2">
                             <a type="submit" data-modal-target="confirmD-modal" data-modal-toggle="confirmD-modal"
                                 class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
                                 Vacinação</a>
                         </div>
-
-                        <div class="col-end-6 col-span-2">
-                            <a data-modal-target="registerD-modal" data-modal-toggle="registerD-modal"
-                                class="cursor-pointer relative inline-flex items-center justify-center p-0.5 me-4 overflow-hidden text-sm font-medium text-gray-800 dark:text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                                <span
-                                    class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-opacity-0">
-                                    <div class="inline-flex items-center align-middle">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                            class="w-4 h-4 me-2">
-                                            <path
-                                                d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
-                                        </svg>
-
-                                        {{ __('Incluir Dependente') }}
-                                    </div>
-                                </span>
-                            </a>
-                        </div>
+                        
                     @else
                         <div class="col-end-6 col-span-2">
                             <a data-modal-target="unconfirmD-modal" data-modal-toggle="unconfirmD-modal"
@@ -104,7 +86,8 @@
                         </svg>
                     </div>
                     @if (Auth::user()->vaccine_id == 1)
-                        <a class="col-span-2 bg-green-600 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">Apto
+                        <a
+                            class="col-span-2 bg-green-600 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">Apto
                             à vacinação</a>
                     @elseif (Auth::user()->vaccine_id == 0)
                         <a
@@ -113,8 +96,9 @@
                     @endif
                     <div class="row-span-2 col-span-1"></div>
                     @if (Auth::user()->vaccine_id == 1)
-                    <a class="col-span-1 bg-blue-500 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">1
-                        Dose</a>
+                        <a
+                            class="col-span-1 bg-blue-500 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">1
+                            Dose</a>
                     @endif
                 </div>
                 <h5
@@ -136,7 +120,7 @@
                                     if (Auth::user()->unit_id == $ru->id) {
                                         echo 'Unidade de vacinação: ' . $ru->name . ', ' . $ru->city;
                                     }
-                                };
+                                }
                             }
                         }
                     @endphp
@@ -148,24 +132,17 @@
                     <div class="grid grid-cols-4 gap-14">
                         <div class="p-6 pt-0 col-span-3">
                             @if (Auth::user()->vaccine_id == 0)
-                                <div class="col-end-4 col-span-2">
-                                    <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <input type="hidden" name="vaccine_id" value="1">
-                                        <button type="submit" data-modal-target="confirmU-modal"
-                                            data-modal-toggle="confirmU-modal"
-                                            class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Realizar
-                                            Adesão</button>
-                                    </form>
+                                <div class="col-end-4 mb-2 col-span-2">
+                                    <a type="submit" data-modal-target="confirmC-modal"
+                                        data-modal-toggle="confirmC-modal"
+                                        class="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Realizar
+                                        Adesão</a>
                                 </div>
                             @elseif (Auth::user()->vaccine_id == 1)
                                 <div class="col-end-4 mb-2 col-span-2">
                                     <a type="submit" data-modal-target="unconfirmU-modal"
                                         data-modal-toggle="unconfirmU-modal"
-                                        class=" text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Desfazer
+                                        class="cursor-pointer text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Desfazer
                                         Adesão</a>
                                 </div>
                             @endif
@@ -284,7 +261,7 @@
                                             if ($rs->unit_id == $ru->id) {
                                                 echo 'Unidade de vacinação: ' . $ru->name . ', ' . $ru->city;
                                             }
-                                        };
+                                        }
                                     }
                                 }
                             @endphp
@@ -296,11 +273,10 @@
                             <div class="grid grid-cols-4 gap-14">
                                 <div class="p-6 pt-0 col-span-3">
                                     @if ($rs->vaccine_id == 0)
-                                        <div class="col-end-4 col-span-2">
-                                            <a type="submit"
-                                                data-modal-target="confirmD-modal?id={{ $rs->id }}"
+                                        <div class="col-end-4 mb-2 col-span-2">
+                                            <a type="submit" data-modal-target="confirmD-modal?id={{ $rs->id }}"
                                                 data-modal-toggle="confirmD-modal?id={{ $rs->id }}"
-                                                class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Realizar
+                                                class="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Realizar
                                                 Adesão</a>
                                         </div>
                                     @elseif ($rs->vaccine_id == 1)
@@ -624,26 +600,6 @@
                             Total de doses: {{ $totalVaccinIds + Auth::user()->vaccine_id }}
                         </h3>
 
-                        <h5 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                            {{ __('Escolha abaixo a unidade para sua vacinação') }}
-                        </h5>
-                        <div class="mt-4 mb-6">
-                            <select name="unit_id" id="unit_id"
-                                class="block mt-1 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                required>
-                                <option value="">Selecione a unidade que prefere se vacinar</option>
-                                @if ($unit->count() > 0)
-                                    @foreach ($unit as $rs)
-                                        <option value="{{ $rs->id }}">
-                                            {{ $rs->name }}, {{ $rs->city }}
-                                        </option>
-                                    @endforeach
-                                @else
-                                    <option value="0">Unidades não encontradas</option>
-                                @endif
-                            </select>
-                            <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
-                        </div>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses serão
                             descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
 
@@ -696,6 +652,70 @@
         </div>
     </div>
 
+    <!-- Confirm C modal -->
+
+    <div id="confirmC-modal" tabindex="-1"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <form action="{{ route('register.confirm', ['confirm' => Auth::user()->id]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" name="vaccine_id" value="1">
+
+                    <button type="button"
+                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="confirmC-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Fechar</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <h5 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                            {{ __('Escolha abaixo a unidade para sua vacinação.') }}
+                        </h5>
+                        <div class="mt-4 mb-6">
+                            <select name="unit_id" id="unit_id"
+                                class="block mt-1 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                required>
+                                <option value="">Selecione a unidade que prefere se vacinar</option>
+                                @if ($unit->count() > 0)
+                                    @foreach ($unit as $rs)
+                                        <option value="{{ $rs->id }}">
+                                            {{ $rs->name }}, {{ $rs->city }}
+                                        </option>
+                                    @endforeach
+                                @else
+                                    <option value="0">Unidades não encontradas</option>
+                                @endif
+                            </select>
+                            <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
+                        </div>
+
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses
+                            serão
+                            descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
+
+                        <button data-modal-hide="confirmC-modal" type="submit"
+                            class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            Sim, estou certo disso!
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Modal Termos-->
@@ -733,23 +753,23 @@
         </div>
     </div>
 
-            @php
-                $user = Auth::user();
-                $showModal = !session()->has('first_login') && $user;
-                if ($showModal) {
-                    session()->put('first_login', true);
-                }
-            @endphp
+    @php
+        $user = Auth::user();
+        $showModal = !session()->has('first_login') && $user;
+        if ($showModal) {
+            session()->put('first_login', true);
+        }
+    @endphp
 
-            @if ($showModal)
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById('static-modal').classList.remove('hidden');
-                        document.getElementById('static-modal').classList.add('flex');
-                        document.getElementById('static-modal').classList.add('bg-gray-900');
-                        document.getElementById('static-modal').classList.add('bg-opacity-50');
-                    });
-                </script>
-            @endif
+    @if ($showModal)
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('static-modal').classList.remove('hidden');
+                document.getElementById('static-modal').classList.add('flex');
+                document.getElementById('static-modal').classList.add('bg-gray-900');
+                document.getElementById('static-modal').classList.add('bg-opacity-50');
+            });
+        </script>
+    @endif
 
 </x-app-layout>
