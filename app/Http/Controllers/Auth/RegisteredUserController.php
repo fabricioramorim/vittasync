@@ -93,7 +93,6 @@ class RegisteredUserController extends Controller
         'number',
         'is_admin',
         'is_active',
-        'unit_id',
         'email',
         'password'
     ));

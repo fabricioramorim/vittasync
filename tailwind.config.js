@@ -24,4 +24,6 @@ export default {
     plugins: [
         forms
     ],
+    darkMode: 'false',
+
 };

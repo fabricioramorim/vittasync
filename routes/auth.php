@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('dashboard/{dependent}', [DependentController::class, 'destroy'])
                 ->name('dashboard.destroy');
 
+    Route::put('dashboard/{confirm}', [DependentController::class, 'confirm'])
+                ->name('dashboard.confirm');
+
+
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 

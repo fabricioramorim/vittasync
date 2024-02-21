@@ -7,7 +7,7 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="registration" :value="__('Matrícula/Chapa')" class="dark:text-gray-600"/>
+            <x-input-label for="registration" :value="__('Matrícula / Chapa')" class="dark:text-gray-600"/>
             <x-text-input id="registration" class="block mt-1 w-full dark:bg-white dark:border-gray-300" type="text" name="registration" :value="old('registration')"
                 required autofocus autocomplete="registration" />
             <x-input-error :messages="$errors->get('registration')" class="mt-2" />

@@ -73,7 +73,7 @@ class DependentController extends Controller
                 'phone' => $request->phone,
                 'vaccine_id' => $request->vaccine_id,
                 'employee_id' => Auth::user()->id,
-                'unit_id' => Auth::user()->unit_id,
+                'unit_id' => '',
                 'is_active' => 1,
             ]);
         } catch (QueryException $e) {
@@ -97,6 +97,30 @@ class DependentController extends Controller
 
         return redirect()->back()->with('message', 'Erro ao atualizar dependente!')->with('type', 'danger');
     }
+
+    public function confirm(Request $request, string $id)
+    {
+
+        $confirmed = $this->user->where('id', $id)->update($request->except(
+            'name',
+            'last_name',
+            'cpf',
+            'birth_date',
+            'employee_id',
+            'unit_id',
+            'is_active',
+    ));
+
+    if ($confirmed && $request->vaccin_confirm == 1) {
+        return redirect()->back()->with('message', 'Confirmação realizada com sucesso!')->with('type', 'success');
+    }
+    elseif ($confirmed && $request->vaccin_confirm == 0) {
+        return redirect()->back()->with('message', 'Confirmação cancelada com sucesso!')->with('type', 'success');
+    }
+    else {
+        return redirect()->back()->with('message', 'Erro na confirmação!')->with('type', 'danger');
+    }
+}
 
     public function destroy(string $id)
     {
