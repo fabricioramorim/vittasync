@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('accesses', function (Blueprint $table) {
             $table->id();
             $table->date('date_access');
+            $table->date('date_access_end');
             $table->timestamps();
         });
     }

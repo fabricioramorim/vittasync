@@ -58,7 +58,7 @@
                 @foreach ($access as $rs)
                 <div class="p-4 md:p-5 space-y-4">
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        Informamos que, a partir de {{ \Carbon\Carbon::parse($rs->date_access)->format('d/m/Y') }} até {{ \Carbon\Carbon::parse($rs->date_access_end)->format('d/m/Y') }},, suas permissões de acesso ao sistema serão alteradas. Você terá apenas acesso para visualizar os dados, mas não poderá mais editar ou criar novos registros.
+                        Informamos que, a partir de {{ \Carbon\Carbon::parse($rs->date_access)->format('d/m/Y') }} até {{ \Carbon\Carbon::parse($rs->date_access_end)->format('d/m/Y') }}, suas permissões de acesso ao sistema serão alteradas. Você terá apenas acesso para visualizar os dados, mas não poderá mais editar ou criar novos registros.
                     </p>
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                         Essa alteração é necessária para garantir a segurança dos dados e a conformidade com as políticas internas da empresa.

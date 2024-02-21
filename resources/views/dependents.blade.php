@@ -118,7 +118,7 @@
                             if ($unit->count() > 0) {
                                 foreach ($unit as $ru) {
                                     if (Auth::user()->unit_id == $ru->id) {
-                                        echo 'Unidade de vacinação: ' . $ru->name . ', ' . $ru->city;
+                                        echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
                                     }
                                 }
                             }
@@ -259,7 +259,7 @@
                                     if ($unit->count() > 0) {
                                         foreach ($unit as $ru) {
                                             if ($rs->unit_id == $ru->id) {
-                                                echo 'Unidade de vacinação: ' . $ru->name . ', ' . $ru->city;
+                                                echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
                                             }
                                         }
                                     }
@@ -526,8 +526,7 @@
                                 </svg>
 
                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                    Dependentes menores de 9 anos, receberão 2 doses já definidas no calendário de
-                                    vacinação.
+                                    Dependentes menores de 9 anos, que nunca foram vacinados, devem receber 2 doses, conforme preconizado no calendário de vacinação.
                                     <h5 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                         {{ __('Escolha abaixo a unidade para a vacinação do(a) ') }}
                                         {{ $rs->name }}
@@ -540,7 +539,7 @@
                                             @if ($unit->count() > 0)
                                                 @foreach ($unit as $rs)
                                                     <option value="{{ $rs->id }}">
-                                                        {{ $rs->name }}, {{ $rs->city }}
+                                                        {{ $rs->city }}, {{ $rs->name }}
                                                     </option>
                                                 @endforeach
                                             @else
@@ -691,7 +690,7 @@
                                 @if ($unit->count() > 0)
                                     @foreach ($unit as $rs)
                                         <option value="{{ $rs->id }}">
-                                            {{ $rs->name }}, {{ $rs->city }}
+                                            {{ $rs->city }}, {{ $rs->name }}
                                         </option>
                                     @endforeach
                                 @else

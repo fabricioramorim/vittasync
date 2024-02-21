@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
  // Initial user
  DB::table('accesses')->insert([
     'id' => '0',
-    'date_access' => '2024-10-12',
+    'date_access' => '2024-03-01',
+    'date_access_end' => '2024-03-30',
 ]);
 
 // Users seeder
@@ -186,7 +187,25 @@ DB::table('dependents')->insert($dependents);
                 'name' => 'Taquaral - Rua Desembargador Campos Maia, 15 Jardim Dom Bosco',
                 'city' => 'Campinas/SP',
                 'is_active' => '1',
-            ]
+            ],
+            [
+                'id' => '16',
+                'name' => 'Instituto Embraer - Av. Alcides Cagliari, 2281 - Jardim Aeroporto',
+                'city' => 'Botucatu/SP',
+                'is_active' => '1',
+            ],
+            [
+                'id' => '17',
+                'name' => 'Embraer - Av. Brigadeiro Faria Lima, 2170 - Recanto dos Eucaliptos',
+                'city' => 'São José dos Campos/SP',
+                'is_active' => '1',
+            ],
+            [
+                'id' => '18',
+                'name' => 'Rotary Club - Av. André Onofrio, 171 - Vila Guaianazes',
+                'city' => 'Araraquara/SP',
+                'is_active' => '1',
+            ],
             ];
 
         DB::table('units')->insert($units);
