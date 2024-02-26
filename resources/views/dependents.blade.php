@@ -4,22 +4,22 @@
     <x-slot name="header">
 
         <h2
-            class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight flex justify-between ml-1 mr-2 items-center">
+            class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight lg:flex lg:justify-between lg:ml-1 md:mr-2 md:flex md:justify-between md:ml-1 md:mr-2 items-center">
             {{ __('Sistema de Adesão - Vacivitta') }}
-            <div class="grid grid-cols-6 grid-rows-1  items-center">
+            <div class="grid grid-cols-2 gap-4 grid-rows-1 items-center">
                 @php
                     $access = new \Carbon\Carbon($access->where('id', 1)->get('date_access'));
                 @endphp
                 @if ($access >= \Carbon\Carbon::now()->subDays(7))
                     @if (Auth::user()->vaccin_confirm == 0)
-                        <div class="col-end-6 col-span-2">
+                        <div class="col-span-2">
                             <a type="submit" data-modal-target="confirmD-modal" data-modal-toggle="confirmD-modal"
                                 class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
                                 Vacinação</a>
                         </div>
                         
                     @else
-                        <div class="col-end-6 col-span-2">
+                        <div class="col-span-2">
                             <a data-modal-target="unconfirmD-modal" data-modal-toggle="unconfirmD-modal"
                                 class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Desfazer
                                 Confirmação</a>
@@ -27,9 +27,9 @@
                     @endif
 
                 @endif
-                <div class="col-end-8 col-span-2 mb-1">
+                <div class="col-end-6 col-span-2 mb-1">
                     <a href="{{ asset('bula_vaxigrip_tetra.pdf') }}" download="bula_vaxigrip_tetra.pdf"
-                        class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Bula da vacina</a>
                 </div>
             </div>
@@ -72,7 +72,7 @@
     @endif
 
     <!-- Hero User -->
-    <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
         <!-- User card -->
         <div
             class="row-span-3 text-gray-700 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl">
@@ -116,7 +116,7 @@
                     @php
                         if (Auth::user()->vaccine_id == 1) {
                             if ($unit->count() > 0) {
-                                foreach ($unit as $ru) {
+                                foreach ($unit->where('is_corp', 0) as $ru) {
                                     if (Auth::user()->unit_id == $ru->id) {
                                         echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
                                     }
@@ -200,7 +200,7 @@
     </div>
 
     <!-- List of dependents -->
-    <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
 
         @if ($dependent->count() > 0)
             @foreach ($dependent as $rs)
@@ -256,8 +256,8 @@
                             class="mt-4 font-semibold block font-sans text-base antialiased leading-relaxed text-inherit cursor-default">
                             @php
                                 if ($rs->vaccine_id == 1) {
-                                    if ($unit->count() > 0) {
-                                        foreach ($unit as $ru) {
+                                    if ($unit->where('is_corp', 0)->count() > 0) {
+                                        foreach ($unit->where('is_corp', 0) as $ru) {
                                             if ($rs->unit_id == $ru->id) {
                                                 echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
                                             }

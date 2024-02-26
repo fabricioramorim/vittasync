@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('city')->nullable();
             $table->string('is_active')->default('1');
+            $table->string('is_corp')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });
