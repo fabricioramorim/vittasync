@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
  // Initial user
  DB::table('accesses')->insert([
     'id' => '0',
-    'date_access' => '2024-03-01',
-    'date_access_end' => '2024-03-30',
+    'date_access' => '2024-03-11',
+    'date_access_end' => '2024-03-22',
 ]);
 
 // Users seeder

@@ -14,7 +14,7 @@
                     @if (Auth::user()->vaccin_confirm == 0)
                         <div class="col-end-6 col-span-2">
                             <a type="submit" data-modal-target="confirmD-modal" data-modal-toggle="confirmD-modal"
-                                class=" text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
+                                class="cursor-pointer text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Confirmar
                                 Vacinação</a>
                         </div>
                         
@@ -549,12 +549,10 @@
                                         <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
                                     </div>
 
-                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses
-                                        serão
-                                        descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses reservadas serão descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
 
                                     <button data-modal-hide="confirmD-modal?id={{ $rs->id }}" type="submit"
-                                        class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                        class="cursor-pointer text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                         Sim, estou certo disso!
                                     </button>
 
@@ -599,11 +597,10 @@
                             Total de doses: {{ $totalVaccinIds + Auth::user()->vaccine_id }}
                         </h3>
 
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses serão
-                            descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses reservadas serão descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
 
                         <button data-modal-hide="confirmD-modal" type="submit"
-                            class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            class="cursor-pointer text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                             Sim, estou certo disso!
                         </button>
 
@@ -700,12 +697,10 @@
                             <x-input-error :messages="$errors->get('unit_id')" class="mt-2" />
                         </div>
 
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses
-                            serão
-                            descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses reservadas serão descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
 
                         <button data-modal-hide="confirmC-modal" type="submit"
-                            class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            class="cursor-pointer text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                             Sim, estou certo disso!
                         </button>
 
@@ -740,7 +735,7 @@
                 </div>
                 <div class="p-4 md:p-5 space-y-4">
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        Deixamos claro que o pagamento das doses será descontado em folha de pagamento.
+                        Deixamos claro que o pagamento das doses reservadas serão descontado em folha de pagamento.
                     </p>
                 </div>
                 <!-- Modal footer -->
