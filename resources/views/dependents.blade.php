@@ -4,7 +4,7 @@
     <x-slot name="header">
 
         <h2
-            class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight lg:flex lg:justify-between lg:ml-1 md:mr-2 md:flex md:justify-between md:ml-1 md:mr-2 items-center">
+            class="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight lg:flex lg:justify-between lg:ml-1 md:mr-2 md:flex md:justify-between md:ml-1 items-center">
             {{ __('Sistema de Adesão - Vacivitta') }}
             <div class="grid grid-cols-2 gap-4 grid-rows-1 items-center">
                 @php
