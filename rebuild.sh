@@ -12,11 +12,11 @@ print_header() {
 ./vendor/bin/sail npm run build
 
 # Limpar o cache das telas
-php artisan cache:clear
-php artisan view:clear
+./vendor/bin/sail php artisan cache:clear
+./vendor/bin/sail artisan view:clear
 
 # Reiniciar o Laravel Sail
-sail down
-sail up -d
+./vendor/bin/sail down
+./vendor/bin/sail up -d
 
 echo "**Processo concluído! O Laravel Sail foi reiniciado, rebuild efetuado e o cache limpo.**"
