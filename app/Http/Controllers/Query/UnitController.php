@@ -18,7 +18,7 @@ class UnitController extends Controller
     public function index()
     {
         //retorna a view de login com a busca na tabela "access" no campo date_access
-        $unit = Unit::orderBy('name', 'DESC')->get();
+        $unit = Unit::orderBy('city', 'DESC')->get();
         return view('dependents', compact('access'));
     }
 }
