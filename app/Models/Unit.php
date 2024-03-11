@@ -13,6 +13,7 @@ class Unit extends Model
         'name',
         'city',
         'is_active',
+        'is_corp'
     ];
 
     protected $casts = [
