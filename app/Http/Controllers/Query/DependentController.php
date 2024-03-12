@@ -35,7 +35,7 @@ class DependentController extends Controller
 
     public function index()
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::user()->registration;
         $dependent = Dependent::where('employee_id', $userId)
             ->orderBy('created_at', 'DESC')
             ->get();
