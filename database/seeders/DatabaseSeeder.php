@@ -212,6 +212,13 @@ DB::table('dependents')->insert($dependents);*/
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
+            [
+                'id' => '35',
+                'name' => 'EVE',
+                'city' => '',
+                'is_active' => '1',
+                'is_corp' => '1',
+            ],
             ];
 
         DB::table('units')->insert($units);
