@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
  // Initial user
- DB::table('accesses')->insert([
+ /*DB::table('accesses')->insert([
     'id' => '0',
     'date_access' => '2024-03-11',
     'date_access_end' => '2024-03-22',
-]);
+]);*/
 
 // Users seeder
-$users = [
+/*$users = [
     [
         'id' => '0',
         'name' => 'Fabricio',
@@ -48,7 +48,7 @@ $users = [
 ];
 
 DB::table('users')->insert($users);
-
+*/
 // Dependents Seeder
 /*$dependents = [
     
@@ -180,42 +180,42 @@ DB::table('dependents')->insert($dependents);*/
             [
                 'id' => '30',
                 'name' => 'Embraer',
-                'city' => 'São José dos Campos/SP',
+                'city' => null,
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
             [
                 'id' => '31',
                 'name' => 'Visiona Tecnologia Espacial S.A.',
-                'city' => '',
+                'city' => null,
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
             [
                 'id' => '32',
                 'name' => 'Atech',
-                'city' => '',
+                'city' => null,
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
             [
                 'id' => '33',
                 'name' => 'ELEB',
-                'city' => '',
+                'city' => null,
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
             [
                 'id' => '34',
                 'name' => 'EMBRAERPREV',
-                'city' => '',
+                'city' => null,
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
             [
                 'id' => '35',
                 'name' => 'EVE',
-                'city' => '',
+                'city' => null,
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
