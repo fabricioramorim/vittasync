@@ -111,20 +111,7 @@
                 <p class="block font-sans text-base antialiased font-light leading-relaxed text-inherit cursor-default">
                     Data de Nascimento: {{ \Carbon\Carbon::parse(Auth::user()->birth_date)->format('d/m/Y') }}
                 </p>
-                <p
-                    class="mt-4 font-semibold block font-sans text-base antialiased leading-relaxed text-inherit cursor-default">
-                    @php
-                        if (Auth::user()->vaccine_id == 1) {
-                                if ($unit->where('is_corp', 0)->count() > 0) {
-                                    foreach ($unit->where('is_corp', 0) as $ru) {
-                                        if ($rs->unit_id == $ru->id) {
-                                            echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
-                                        }
-                                    }
-                                }
-                        }
-                    @endphp
-                </p>
+                
 
             </div>
             @if ($access >= \Carbon\Carbon::now()->subDays(7))
