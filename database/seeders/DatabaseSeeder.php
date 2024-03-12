@@ -463,6 +463,13 @@ DB::table('dependents')->insert($dependents);
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
+            [
+                'id' => '31',
+                'name' => 'Visiona Tecnologia Espacial S.A.',
+                'city' => '',
+                'is_active' => '1',
+                'is_corp' => '1',
+            ],
             ];
 
         DB::table('units')->insert($units);
