@@ -15,53 +15,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       // Users seeder
-       $users = [
-        [
-            'id' => '0',
-            'name' => 'Fabricio',
-            'last_name' => 'Amorim',
-            'cpf' => '12345678901',
-            'birth_date' => '1980-01-01',
-            'registration' => '2671',
-            'phone' => '+5511953704921',
-            'cep' => '06766200',
-            'address' => 'Rua João de Barros, 100',
-            'number' => '100',
-            'is_admin' => '0',
-            'is_active' => '1',
-            'vaccine_id' => '2',
-            'vaccin_confirm' => '0',
-            'unit_id' => '1',
-            'email' => 'contato@fabrioceras.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ],
-        
-        [
-            'id' => '6',
-            'name' => 'Edneia',
-            'last_name' => 'de Fatima Siqueira Maciel',
-            'cpf' => '396.897.488-31',
-            'birth_date' => '1991-03-14',
-            'registration' => '482964',
-            'phone' => '+5511953704921',
-            'cep' => '06766200',
-            'address' => 'Rua João de Barros, 100',
-            'number' => '100',
-            'is_admin' => '99',
-            'is_active' => '1',
-            'vaccine_id' => '2',
-            'vaccin_confirm' => '0',
-            'unit_id' => '1',
-            'email' => 'contato@fabrioceras.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('482964'),
-            'remember_token' => Str::random(10),
-        ]
-    ];
-
-    DB::table('users')->insert($users);
+        DB::unprepared("
+            INSERT INTO users (id, name, last_name, cpf, birth_date, registration, phone, cep, address, number, is_admin, is_active, vaccine_id, vaccin_confirm, unit_id, email, email_verified_at, password, remember_token) VALUES
+            ('100', 'VICTOR HUGO GODOI', 'PEDROTA', '511.835.148-08', '2001-08-03', 'E00037', 'não informado', '00000-00', 'não informado', '0', '0', '1', '0', '0', '31', 'not@email.com', '".now()."', '".Hash::make('03082001')."', '".Str::random(10)."');
+        ");
     }
 }
