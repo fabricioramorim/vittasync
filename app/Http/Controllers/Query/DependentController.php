@@ -23,7 +23,7 @@ class DependentController extends Controller
      */
     public function create(): View
     {
-        $unit = Unit::orderBy('created_at', 'DESC')->get();
+        $unit = Unit::orderBy('city', 'DESC')->get();
         return view('auth.register', compact('unit'));
     }
     public readonly Dependent $dependent;
