@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dependents', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
             $table->string('name');
             $table->string('last_name');
-            $table->string('cpf')->unique();
+            $table->string('cpf');
             $table->string('birth_date');
             $table->string('vaccine_id');
             $table->string('unit_id')->nullable();
