@@ -111,7 +111,20 @@
                 <p class="block font-sans text-base antialiased font-light leading-relaxed text-inherit cursor-default">
                     Data de Nascimento: {{ \Carbon\Carbon::parse(Auth::user()->birth_date)->format('d/m/Y') }}
                 </p>
-                
+                <p
+                    class="mt-4 font-semibold block font-sans text-base antialiased leading-relaxed text-inherit cursor-default">
+                    @php
+                        if (Auth::user()->vaccine_id == 1) {
+                            if ($unit->count() > 0) {
+                                foreach ($unit->where('is_corp', 0) as $ru) {
+                                    if (Auth::user()->unit_id == $ru->id) {
+                                        echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
+                                    }
+                                }
+                            }
+                        }
+                    @endphp
+                </p>
 
             </div>
             @if ($access >= \Carbon\Carbon::now()->subDays(7))
@@ -523,8 +536,8 @@
                                             class="block mt-1 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             required>
                                             <option value="">Selecione a unidade que prefere se vacinar</option>
-                                            @if ($unit->count() > 0)
-                                                @foreach ($unit as $rs)
+                                            @if ($unit->where('is_corp', 0)->sortBy('city')->count() > 0)
+                                                @foreach ($unit->where('is_corp', 0)->sortBy('city') as $rs)
                                                     <option value="{{ $rs->id }}">
                                                         {{ $rs->city }}, {{ $rs->name }}
                                                     </option>
@@ -671,8 +684,8 @@
                                 class="block mt-1 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 required>
                                 <option value="">Selecione a unidade que prefere se vacinar</option>
-                                @if ($unit->count() > 0)
-                                    @foreach ($unit as $rs)
+                                @if ($unit->where('is_corp', 0)->sortBy('city')->count() > 0)
+                                    @foreach ($unit->where('is_corp', 0)->sortBy('city') as $rs)
                                         <option value="{{ $rs->id }}">
                                             {{ $rs->city }}, {{ $rs->name }}
                                         </option>
