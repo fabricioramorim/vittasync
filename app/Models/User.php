@@ -32,6 +32,7 @@ class User extends Authenticatable
         'vaccine_id',
         'vaccin_confirm',
         'unit_id',
+        'vaccin_location_id',
         'email',
         'password',
     ];

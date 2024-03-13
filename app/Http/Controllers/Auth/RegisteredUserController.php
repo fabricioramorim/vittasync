@@ -93,8 +93,9 @@ class RegisteredUserController extends Controller
         'number',
         'is_admin',
         'is_active',
+        'unit_id',
         'email',
-        'password'
+        'password',
     ));
 
         if ($confirmed && $request->vaccin_confirm == 1) {

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
-class DatabaseSeeder extends Seeder
+class DatabaseSeederLocal extends Seeder
 {
     /**
      * Seed the application's database.
@@ -16,19 +16,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
  // Initial user
- /*DB::table('accesses')->insert([
+ DB::table('accesses')->insert([
     'id' => '0',
     'date_access' => '2024-03-11',
     'date_access_end' => '2024-03-22',
-]);*/
+]);
 
 // Users seeder
-/*$users = [
+$users = [
     [
         'id' => '0',
         'name' => 'Fabricio',
         'last_name' => 'Amorim',
-        'cpf' => '12345678901',
+        'cpf' => '123456711111',
         'birth_date' => '1980-01-01',
         'registration' => '2671',
         'phone' => '+5511953704921',
@@ -44,17 +44,84 @@ class DatabaseSeeder extends Seeder
         'email_verified_at' => now(),
         'password' => Hash::make('password'),
         'remember_token' => Str::random(10),
+    ],
+    
+    [
+        'id' => '482964',
+        'name' => 'Edneia',
+        'last_name' => 'de Fatima Siqueira Maciel',
+        'cpf' => '396.897.488-31',
+        'birth_date' => '1991-03-14',
+        'registration' => '482964',
+        'phone' => '+5511953704921',
+        'cep' => '06766200',
+        'address' => 'Rua João de Barros, 100',
+        'number' => '100',
+        'is_admin' => '0',
+        'is_active' => '1',
+        'vaccine_id' => '0',
+        'vaccin_confirm' => '0',
+        'unit_id' => '0',
+        'email' => 'email@email.com',
+        'email_verified_at' => now(),
+        'password' => Hash::make('14031991'),
+        'remember_token' => Str::random(10),
     ]
 ];
 
 DB::table('users')->insert($users);
-*/
+
 // Dependents Seeder
-/*$dependents = [
+$dependents = [
+
+            [
+                'id' => '1',
+                'name' => 'Maria Eduarda',
+                'last_name' => 'Amorim',
+                'cpf' => '13345678901',
+                'birth_date' => '2022-01-01',
+                'vaccine_id' => '0',
+                'employee_id' => '482964',
+                'unit_id' => '1',
+                'is_active' => '1',
+            ],
+            [
+                'id' => '2',
+                'name' => 'Maria Eduarda',
+                'last_name' => 'Amorim',
+                'cpf' => '12344678901',
+                'birth_date' => '2015-01-01',
+                'vaccine_id' => '0',
+                'employee_id' => '482964',
+                'unit_id' => '1',
+                'is_active' => '1',
+            ],
+            [
+                'id' => '3',
+                'name' => 'Maria Eduarda',
+                'last_name' => 'Amorim',
+                'cpf' => '12345674901',
+                'birth_date' => '2014-01-01',
+                'vaccine_id' => '0',
+                'employee_id' => '482964',
+                'unit_id' => '1',
+                'is_active' => '1',
+            ],
+            [
+                'id' => '4',
+                'name' => 'Maria Eduarda',
+                'last_name' => 'Amorim',
+                'cpf' => '12345678951',
+                'birth_date' => '2010-01-01',
+                'vaccine_id' => '0',
+                'employee_id' => '482964',
+                'unit_id' => '1',
+                'is_active' => '1',
+            ]
     
 ];
 
-DB::table('dependents')->insert($dependents);*/
+DB::table('dependents')->insert($dependents);
 
         // Units seeder
         $units = [
@@ -180,42 +247,14 @@ DB::table('dependents')->insert($dependents);*/
             [
                 'id' => '30',
                 'name' => 'Embraer',
-                'city' => null,
+                'city' => 'São José dos Campos/SP',
                 'is_active' => '1',
                 'is_corp' => '1',
             ],
             [
                 'id' => '31',
                 'name' => 'Visiona Tecnologia Espacial S.A.',
-                'city' => null,
-                'is_active' => '1',
-                'is_corp' => '1',
-            ],
-            [
-                'id' => '32',
-                'name' => 'Atech',
-                'city' => null,
-                'is_active' => '1',
-                'is_corp' => '1',
-            ],
-            [
-                'id' => '33',
-                'name' => 'ELEB',
-                'city' => null,
-                'is_active' => '1',
-                'is_corp' => '1',
-            ],
-            [
-                'id' => '34',
-                'name' => 'EMBRAERPREV',
-                'city' => null,
-                'is_active' => '1',
-                'is_corp' => '1',
-            ],
-            [
-                'id' => '35',
-                'name' => 'EVE',
-                'city' => null,
+                'city' => '',
                 'is_active' => '1',
                 'is_corp' => '1',
             ],

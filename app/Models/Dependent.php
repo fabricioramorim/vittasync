@@ -15,8 +15,10 @@ class Dependent extends Model
         'cpf',
         'birth_date',
         'vaccine_id',
+        'vaccin_qtd',
         'employee_id',
         'unit_id',
+        'vaccin_location_id',
         'is_active',
     ];
 
