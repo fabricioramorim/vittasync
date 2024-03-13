@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
  // Initial user
- /*DB::table('accesses')->insert([
+ DB::table('accesses')->insert([
     'id' => '0',
     'date_access' => '2024-03-11',
     'date_access_end' => '2024-03-22',
-]);*/
+]);
 
 // Users seeder
 /*$users = [
@@ -57,7 +57,7 @@ DB::table('users')->insert($users);
 DB::table('dependents')->insert($dependents);*/
 
         // Units seeder
-        $units = [
+        /*$units = [
             [
                 'id' => '10',
                 'name'=> 'Rotary Club',
@@ -221,7 +221,7 @@ DB::table('dependents')->insert($dependents);*/
             ],
             ];
 
-        DB::table('units')->insert($units);
+        DB::table('units')->insert($units);*/
     }
 
 
