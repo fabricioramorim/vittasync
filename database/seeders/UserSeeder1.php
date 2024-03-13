@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
-class UserSeeder2 extends Seeder
+class UserSeeder1 extends Seeder
 {
     /**
      * Run the database seeds.
