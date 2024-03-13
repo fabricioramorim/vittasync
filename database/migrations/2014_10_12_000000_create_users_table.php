@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('vaccine_id')->default('2');
             $table->string('vaccin_confirm')->default('0');
             $table->string('unit_id')->default('0');
-            $table->string('vaccin_location_id')->default('0');
+            $table->string('vaccin_location_id')->default('0')->nullable();
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -574,9 +574,37 @@
                                         Sim, estou certo disso!
                                     </button>
                                 @else
-                                    <a
-                                        class="col-span-1 bg-blue-500 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">1
-                                        Dose</a>
+                                    <input type="hidden" name="vaccin_qtd" id="vaccin_qtd">
+
+                                    <h5 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                        {{ __('Escolha abaixo a unidade para a vacinação do(a) ') }}
+                                        {{ $rs->name }}
+                                    </h5>
+
+                                    <div class="mt-4 mb-6">
+                                        <select name="vaccin_location_id" id="vaccin_location_id"
+                                            class="block mt-1 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            required>
+                                            <option value="">Selecione a unidade que prefere se vacinar</option>
+                                            @if ($unit->where('is_corp', 0)->sortBy('city')->count() > 0)
+                                                @foreach ($unit->where('is_corp', 0)->sortBy('city') as $rs)
+                                                    <option value="{{ $rs->id }}">
+                                                        {{ $rs->city }}, {{ $rs->name }}
+                                                    </option>
+                                                @endforeach
+                                            @else
+                                                <option value="0">Unidades não encontradas</option>
+                                            @endif
+                                        </select>
+                                        <x-input-error :messages="$errors->get('vaccin_location_id')" class="mt-2" />
+                                    </div>
+
+                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">As doses reservadas serão descontadas em folha de pagamento. Deseja confirmar a vacinação?</h3>
+
+                                    <button data-modal-hide="confirmD-modal?id={{ $rs->id }}" type="submit"
+                                        class="cursor-pointer text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                        Sim, estou certo disso!
+                                    </button>
                                 @endif
                                 
 

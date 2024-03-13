@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('cpf');
             $table->string('birth_date');
             $table->string('vaccine_id');
-            $table->string('vaccin_qtd')->default('0');
+            $table->string('vaccin_qtd')->default('0')->nullable();
             $table->string('unit_id')->nullable();
-            $table->string('vaccin_location_id')->default('0');
+            $table->string('vaccin_location_id')->default('0')->nullable();
             $table->string('employee_id');
             $table->string('is_active');
             $table->timestamps();
