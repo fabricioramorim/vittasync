@@ -117,7 +117,7 @@
                         if (Auth::user()->vaccine_id == 1) {
                             if ($unit->count() > 0) {
                                 foreach ($unit->where('is_corp', 0) as $ru) {
-                                    if (Auth::user()->unit_id == $ru->id) {
+                                    if (Auth::user()->vaccin_location_id == $ru->id) {
                                         echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
                                     }
                                 }
@@ -167,15 +167,9 @@
                         $totalVaccinIds = 0;
 
                         foreach ($dependent as $rs) {
-                            if ($rs->birth_date >= $dateD && $rs->vaccine_id == 1) {
-                                $totalVaccinIds = $totalVaccinIds + 2;
-                            }
+                        $totalVaccinIds += $rs->vaccin_qtd ;
                         }
-                        foreach ($dependent as $rs) {
-                            if ($rs->birth_date < $dateD && $rs->vaccine_id == 1) {
-                                $totalVaccinIds = $totalVaccinIds + 1;
-                            }
-                        }
+                       
                     @endphp
 
                     Total de doses: {{ $totalVaccinIds + Auth::user()->vaccine_id }}
@@ -226,17 +220,14 @@
                                     à vacinação</a>
                             @endif
                             <div class="row-span-2 col-span-1"></div>
-                            @if ($rs->vaccine_id == 1)
-                                @if ($rs->birth_date >= date('Y-m-d', strtotime('-9 years')))
+                            @if ($rs->vaccin_qtd == 2 )
                                     <a
                                         class="col-span-1 bg-blue-500 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">2
                                         Doses</a>
-                                @else
+                                @elseif ($rs->vaccin_qtd == 1)
                                     <a
                                         class="col-span-1 bg-blue-500 py-1 px-2 rounded-lg text-sm text-white text-center cursor-default">1
                                         Dose</a>
-                                @endif
-                            @else
                                 <a></a>
                             @endif
                         </div>
@@ -258,7 +249,7 @@
                                 if ($rs->vaccine_id == 1) {
                                     if ($unit->where('is_corp', 0)->count() > 0) {
                                         foreach ($unit->where('is_corp', 0) as $ru) {
-                                            if ($rs->unit_id == $ru->id) {
+                                            if ($rs->vaccin_location_id == $ru->id) {
                                                 echo 'Unidade de vacinação: ' . $ru->city . ', ' . $ru->name;
                                             }
                                         }
@@ -414,6 +405,8 @@
                             @method('PUT')
 
                             <input type="hidden" name="vaccine_id" value="0">
+                            <input type="hidden" name="vaccin_qtd" value="0">
+                            <input type="hidden" name="vaccin_location_id" value="">
                             <button type="button"
                                 class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                 data-modal-hide="unconfirmD-modal?id={{ $rs->id }}">
@@ -463,6 +456,7 @@
                     @method('PUT')
 
                     <input type="hidden" name="vaccine_id" value="0">
+                    <input type="hidden" name="vaccin_location_id" value="">
                     <button type="button"
                         class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         data-modal-hide="unconfirmU-modal">
@@ -574,7 +568,7 @@
                                         Sim, estou certo disso!
                                     </button>
                                 @else
-                                    <input type="hidden" name="vaccin_qtd" id="vaccin_qtd">
+                                    <input type="hidden" value="1" name="vaccin_qtd" id="vaccin_qtd">
 
                                     <h5 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                         {{ __('Escolha abaixo a unidade para a vacinação do(a) ') }}
