@@ -82,7 +82,7 @@
                         @php
                             $confirmed = 0;
                             foreach ($user as $us) {
-                                if ($us->is_admin == 0 && $us->vaccin_confirm == 0 && $us->unit_id == Auth::user()->unit_id && $us->is_active == 1) {
+                                if ($us->is_admin == 0 && $us->vaccin_confirm == 0 && $us->is_active == 1) {
                                     $confirmed++;
                                 }
                             }
@@ -138,7 +138,7 @@
                                     }
                                 },
                             },
-                            labels: ["Aptos", "Inaptos"],
+                            labels: ["Adeptos", "Inadeptos"],
                             dataLabels: {
                                 enabled: true,
                                 style: {
