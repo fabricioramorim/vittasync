@@ -35,27 +35,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @php
-                        foreach ($dependent as $rs) {
-                            echo '<div class="flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">';
-                            echo '<div class="p-6 ">';
-                            echo '<h5 class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">';
-                            echo $rs->name;
-                            echo '</h5>';
-                            echo '<p class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">';
-                            echo 'Data de nascimento: ' . date('d/m/Y', strtotime($rs->birth_date));
-                            echo '</p>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-
-                    @endphp
-                </div>
-            </div>
-        </div>
+       
         <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
             <div
                 class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
@@ -70,14 +50,20 @@
 
                         @php
                             $confirmed = 0;
+                            $dependentTotalApt = 0;
                             foreach ($user as $us) {
-                                if ($us->is_admin == 0 && $us->vaccin_confirm == 1 && $us->unit_id == Auth::user()->unit_id && $us->is_active == 1) {
                                     $confirmed++;
-                                }
+                                
+                            }
+
+                            foreach ($dependent as $us) {
+                                    $dependentTotalApt++;
+                                
                             }
                         @endphp
 
                         Total: {{ $confirmed }}
+                        Dependentes: {{ $dependentTotalApt }}
 
                     </p>
                 </div>
