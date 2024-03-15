@@ -10,7 +10,7 @@
 @php
     $dependentTotalApt = 0;
     foreach ($dependent as $ds) {
-        if ($ds->vaccine_id == 1 && $ds->unit_id == Auth::user()->unit_id) {
+        if ($ds->vaccine_id == 1) {
             $dependentTotalApt++;
         }
     }
@@ -19,7 +19,7 @@
 @php
     $dependentTotalInapt = 0;
     foreach ($dependent as $ds) {
-        if ($ds->vaccine_id == 2 && $ds->unit_id == Auth::user()->unit_id) {
+        if ($ds->vaccine_id == 0) {
             $dependentTotalInapt++;
         }
     }
