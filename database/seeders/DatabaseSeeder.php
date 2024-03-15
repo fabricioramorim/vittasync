@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
  // Initial user
- DB::table('accesses')->insert([
+/* DB::table('accesses')->insert([
     'id' => '0',
     'date_access' => '2024-03-11',
     'date_access_end' => '2024-03-22',
-]);
+]);*/
 
 // Users seeder
-/*$users = [
+$users = [
     [
         'id' => '0',
         'name' => 'Fabricio',
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
 ];
 
 DB::table('users')->insert($users);
-*/
+
 // Dependents Seeder
 /*$dependents = [
     
