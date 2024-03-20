@@ -10,7 +10,7 @@
 @php
     $dependentTotalApt = 0;
     foreach ($dependent as $ds) {
-        if ($ds->vaccine_id == 1 && $ds->is_active == 1) {
+        if ($ds->vaccine_id == 1 && $ds->is_active == 1 && vaccin_qtd != null) {
             $dependentTotalApt++;
         }
     }
