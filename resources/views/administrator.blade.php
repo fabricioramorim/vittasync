@@ -55,7 +55,7 @@
 
                         @php
                             $confirmed = 0;
-                            $dependentTotalApt = 0;
+                            $dependentTotal = 0;
                             foreach ($user as $us) {
                                     $confirmed++;
                                 
