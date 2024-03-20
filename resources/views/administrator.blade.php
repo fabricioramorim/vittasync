@@ -62,16 +62,17 @@
                             }
 
                             foreach ($dependent as $us) {
-                                    $dependentTotalApt++;
+                                    $dependentTotal++;
                                 
                             }
                         @endphp
 
                         Total: {{ $confirmed }}
-                        Dependentes: {{ $dependentTotalApt }}
+                        Dependentes: {{ $dependentTotal }}
 
                         Dependentes Adeptos: {{ $dependentTotalApt }}
                         Dependentes Inadeptos: {{ $dependentTotalInapt }}
+                        Total Doses: {{ $dependentTotalQuantDoses }}
 
                     </p>
                 </div>
