@@ -10,7 +10,7 @@
 @php
     $dependentTotalApt = 0;
     foreach ($dependent as $ds) {
-        if ($ds->vaccine_id == 1) {
+        if ($ds->vaccine_id == 1 && $ds->is_active == 1) {
             $dependentTotalApt++;
         }
     }
@@ -19,13 +19,18 @@
 @php
     $dependentTotalInapt = 0;
     foreach ($dependent as $ds) {
-        if ($ds->vaccine_id == 0) {
+        if ($ds->vaccine_id == 0 && $ds->is_active == 1) {
             $dependentTotalInapt++;
         }
     }
 @endphp
 
-
+@php
+    $dependentTotalQuantDoses = 0;
+    foreach ($dependent as $ds) {
+        $dependentTotalQuantDoses += $ds->vaccin_qtd;
+    }
+@endphp
 
 <x-app-layout>
     <x-slot name="header">
@@ -64,6 +69,9 @@
 
                         Total: {{ $confirmed }}
                         Dependentes: {{ $dependentTotalApt }}
+
+                        Dependentes Adeptos: {{ $dependentTotalApt }}
+                        Dependentes Inadeptos: {{ $dependentTotalInapt }}
 
                     </p>
                 </div>
