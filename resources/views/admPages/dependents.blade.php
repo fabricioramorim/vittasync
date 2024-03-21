@@ -3,7 +3,9 @@
     use App\Models\User;
     use App\Models\Unit;
 
-    $dependents = Dependent::all();
+    $dependents = Cache::remember('dependents', 60, function () {
+        return Dependent::all();
+    });
     $user = User::all();
     $unit = Unit::all();
 
@@ -55,9 +57,20 @@
                                 @endif
                             </td>
                             <td>{{ $dependent->vaccin_qtd }}</td>
-                            <td>{{ $user->find($dependent->employee_id)->name ? $user->find($dependent->employee_id)->name : 'Nome não encontrado' }}</td>
+                            <td>{{ $user->find($dependent->employee_id)->name ? $user->find($dependent->employee_id)->name : 'Nome não encontrado' }}
+                            </td>
+                            @php
+                            $nameTit = $user->find($dependent->employee_id);
+                                        
+                            if ($nameTit) {
+                                echo "<td>" . $nameTit->name . "</td>";
+                            } else {
+                                echo "<td>Nome não encontrado</td>";
+                            }
+                            @endphp
                             <td>{{ $dependent->employee_id }}</td>
-                            <td>{{ $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida' }}</td>
+                            <td>{{ $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida' }}
+                            </td>
                             <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
                         </tr>
                     @endforeach

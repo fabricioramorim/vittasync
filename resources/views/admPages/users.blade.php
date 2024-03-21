@@ -3,8 +3,9 @@
     use App\Models\User;
     use App\Models\Unit;
 
-    $users = User::where('is_admin', '!=', 1)
-    ->all();
+    $users = Cache::remember('users', 60, function () {
+        return User::where('is_admin', '!=', 1)->get();
+    });
     $unit = Unit::all();
 
 @endphp
