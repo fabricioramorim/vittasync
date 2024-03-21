@@ -4,7 +4,7 @@
     use App\Models\Unit;
 
     $users = User::where('is_admin', '!=', 1)
-    ->paginate(100);
+    ->all();
     $unit = Unit::all();
 
 @endphp
