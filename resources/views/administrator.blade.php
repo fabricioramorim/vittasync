@@ -48,7 +48,7 @@
 
                     <h5
                         class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
-                        {{ __('Colaboradores confirmados') }}
+                        {{ __('Resumo base') }}
                     </h5>
                     <p
                         class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
@@ -67,12 +67,12 @@
                             }
                         @endphp
 
-                        Total: {{ $confirmed }}
-                        Dependentes: {{ $dependentTotal }}
+                        Total: {{ $confirmed }}<br>
+                        Dependentes: {{ $dependentTotal }}<br><br>
 
-                        Dependentes Adeptos: {{ $dependentTotalApt }}
-                        Dependentes Inadeptos: {{ $dependentTotalInapt }}
-                        Total Doses: {{ $dependentTotalQuantDoses }}
+                        Dependentes Adeptos: {{ $dependentTotalApt }}<br>
+                        Dependentes Inadeptos: {{ $dependentTotalInapt }}<br>
+                        Total Doses: {{ $dependentTotalQuantDoses }}<br>
 
                     </p>
                 </div>
