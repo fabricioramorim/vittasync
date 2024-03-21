@@ -24,7 +24,7 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-8">
                 <div class="pb-4 bg-white dark:bg-gray-900">
                 </div>
-                <table class="w-full text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
+                <table class="display nowrap w-full text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
                     id="example">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
