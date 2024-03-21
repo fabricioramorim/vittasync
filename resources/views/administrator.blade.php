@@ -17,6 +17,15 @@
 @endphp
 
 @php
+    $userTotalApt = 0;
+    foreach ($user as $us) {
+        if ($us->vaccin_confirm == 1 && $us->is_active == 1) {
+            $userTotalApt++;
+        }
+    }
+@endphp
+
+@php
     $dependentTotalInapt = 0;
     foreach ($dependent as $ds) {
         if ($ds->vaccine_id == 0 && $ds->is_active == 1) {
@@ -26,10 +35,32 @@
 @endphp
 
 @php
+    $userTotalInapt = 0;
+    foreach ($user as $us) {
+        if ($us->vaccin_confirm == 0 && $us->is_active == 1) {
+            $userTotalInapt++;
+        }
+    }
+@endphp
+
+@php
     $dependentTotalQuantDoses = 0;
     foreach ($dependent as $ds) {
         $dependentTotalQuantDoses += $ds->vaccin_qtd;
     }
+@endphp
+
+@php
+$userTotal = 0;
+$dependentTotal = 0;
+
+foreach ($user as $us) {
+        $userTotal++;
+}
+
+foreach ($dependent as $us) {
+        $dependentTotal++;  
+}
 @endphp
 
 <x-app-layout>
@@ -53,26 +84,15 @@
                     <p
                         class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
 
-                        @php
-                            $confirmed = 0;
-                            $dependentTotal = 0;
-                            foreach ($user as $us) {
-                                    $confirmed++;
-                                
-                            }
-
-                            foreach ($dependent as $us) {
-                                    $dependentTotal++;
-                                
-                            }
-                        @endphp
-
-                        Total colaboradores: {{ $confirmed }}<br>
+                        Total colaboradores: {{ $userTotal }}<br>
                         Total dependentes: {{ $dependentTotal }}<br><br>
 
                         Dependentes adeptos: {{ $dependentTotalApt }}<br>
                         Dependentes inadeptos: {{ $dependentTotalInapt }}<br>
                         Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br>
+
+                        Colaboradores adeptos: {{ $userTotalApt }}<br>
+                        Colaboradores inadeptos: {{ $userTotalInapt }}<br>
 
                     </p>
                 </div>
