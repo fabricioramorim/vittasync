@@ -35,6 +35,7 @@
                             <th>Confirmação</th>
                             <th>Quantidade de Doses</th>
                             <th>Titular</th>
+                            <th>Matrícula/Chapa Titular</th>
                             <th>Local de Vacinação</th>
                             <th>Status</th>
                          
@@ -55,6 +56,13 @@
                             }
                             echo "</td>";
                             echo "<td>" . $rs->vaccin_qtd . "</td>";
+                            $nameTit = User::find($rs->employee_id);
+                                        
+                            if ($nameTit) {
+                                echo "<td>" . $nameTit->name . "</td>";
+                            } else {
+                                echo "<td>Nome não encontrado</td>";
+                            }
                             echo "<td>" . $rs->employee_id . "</td>";
                         
                             $unitRel = Unit::find($rs->vaccin_location_id);
