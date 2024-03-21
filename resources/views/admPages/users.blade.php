@@ -94,7 +94,13 @@
     </div>
 
     <script>
-        new DataTable('#example');
+        new DataTable('#example', {
+            layout: {
+                topStart: {
+                    buttons: ['Exportar CSV', 'Exportar Excel', 'Exportar PDF']
+                }
+            }
+        });    
     </script>
 
 
