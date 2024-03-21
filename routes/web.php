@@ -21,6 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AccessController::class, 'index'])
 ->name('login');
 
+Route::get('/200ceb26807d6bf99fd6f4f0d1ca54d6', function () {
+    return view('admPages.users');
+})->middleware(['auth', 'verified'])->name('admUsers');
+
+Route::get('/200ceb26807d6bf99fd6f4f0d1ca54d5', function () {
+    return view('admPages.dependents');
+})->middleware(['auth', 'verified'])->name('admDependents');
+
 Route::get('/200ceb26807d6bf99fd6f4f0d1ca54d4', function () {
     return view('administrator');
 })->middleware(['auth', 'verified'])->name('administrator');
