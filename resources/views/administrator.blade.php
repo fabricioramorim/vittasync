@@ -89,7 +89,7 @@ foreach ($dependent as $us) {
 
                         Dependentes adeptos: {{ $dependentTotalApt }}<br>
                         Dependentes inadeptos: {{ $dependentTotalInapt }}<br>
-                        Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br><br
+                        Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br><br>
 
                         Colaboradores adeptos: {{ $userTotalApt }}<br>
                         Colaboradores inadeptos: {{ $userTotalInapt }}<br>
