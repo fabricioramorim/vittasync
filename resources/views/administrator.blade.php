@@ -67,12 +67,12 @@
                             }
                         @endphp
 
-                        Total: {{ $confirmed }}<br>
-                        Dependentes: {{ $dependentTotal }}<br><br>
+                        Total colaboradores: {{ $confirmed }}<br>
+                        Total dependentes: {{ $dependentTotal }}<br><br>
 
-                        Dependentes Adeptos: {{ $dependentTotalApt }}<br>
-                        Dependentes Inadeptos: {{ $dependentTotalInapt }}<br>
-                        Total Doses: {{ $dependentTotalQuantDoses }}<br>
+                        Dependentes adeptos: {{ $dependentTotalApt }}<br>
+                        Dependentes inadeptos: {{ $dependentTotalInapt }}<br>
+                        Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br>
 
                     </p>
                 </div>
