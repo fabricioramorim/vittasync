@@ -3,7 +3,7 @@
     use App\Models\User;
     use App\Models\Unit;
 
-    $dependent = Dependent::all();
+    $dependents = Dependent::paginate(100);
     $user = User::all();
     $unit = Unit::all();
 
@@ -24,11 +24,12 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-8">
                 <div class="pb-4 bg-white dark:bg-gray-900">
                 </div>
-                <table class="display nowrap w-full text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
+                <table
+                    class="display nowrap w-full text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
                     id="example">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            
+
                             <th>Nome</th>
                             <th>CPF</th>
                             <th>Data de Nascimento</th>
@@ -38,54 +39,29 @@
                             <th>Matrícula/Chapa Titular</th>
                             <th>Local de Vacinação</th>
                             <th>Status</th>
-                         
+
                         </tr>
                     </thead>
-                    <tbody>
-                        @php
-                        foreach ($dependent as $rs) {
-                            echo "<tr>";
-                            echo "<td>" . $rs->name . $rs->last_name . "</td>";
-                            echo "<td>" . $rs->cpf . "</td>";
-                            echo "<td>" . date('d/m/Y', strtotime($rs->birth_date)) . "</td>";
-                            echo "<td>";
-                            if ($rs->vaccine_id == 1) {
-                                echo "Adepto";
-                            } else {
-                                echo "Inapto";
-                            }
-                            echo "</td>";
-                            echo "<td>" . $rs->vaccin_qtd . "</td>";
-                            $nameTit = User::find($rs->employee_id);
-                                        
-                            if ($nameTit) {
-                                echo "<td>" . $nameTit->name . "</td>";
-                            } else {
-                                echo "<td>Nome não encontrado</td>";
-                            }
-                            echo "<td>" . $rs->employee_id . "</td>";
-                        
-                            $unitRel = Unit::find($rs->vaccin_location_id);
-                                        
-                            if ($unitRel) {
-                                echo "<td>" . $unitRel->name . "</td>";
-                            } else {
-                                echo "<td>Unidade não definida</td>";
-                            }
-                                                  
-                            echo "<td>";
-                                if ($rs->is_active == 1) {
-                                    echo "Ativo";
-                                } else {
-                                    echo "Inativo";
-                                }
-                            echo "</td>";
-                            echo "</tr>";
-                        }
-                        @endphp
+                    @foreach ($dependents as $dependent)
+                        <tr>
+                            <td>{{ $dependent->name . ' ' . $dependent->last_name }}</td>
+                            <td>{{ $dependent->cpf }}</td>
+                            <td>{{ date('d/m/Y', strtotime($dependent->birth_date)) }}</td>
+                            <td>
+                                @if ($dependent->vaccine_id == 1)
+                                    Adepto
+                                @else
+                                    Inapto
+                                @endif
+                            </td>
+                            <td>{{ $dependent->vaccin_qtd }}</td>
+                            <td>{{ $dependent->employee_id ? $user->find($dependent->employee_id)->name : 'Nome não encontrado' }}</td>
+                            <td>{{ $dependent->employee_id }}</td>
+                            <td>{{ $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida' }}</td>
+                            <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
+                        </tr>
+                    @endforeach
 
-                    </tbody>
-                    
                 </table>
             </div>
 
@@ -97,10 +73,10 @@
         new DataTable('#example', {
             layout: {
                 topStart: {
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                    buttons: ['excel', ]
                 }
             }
-        }); 
+        });
     </script>
 
 

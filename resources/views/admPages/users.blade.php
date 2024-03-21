@@ -3,8 +3,8 @@
     use App\Models\User;
     use App\Models\Unit;
 
-    $dependent = Dependent::all();
-    $user = User::where('is_admin', '!=', 1)->get();
+    $users = User::where('is_admin', '!=', 1)
+    ->paginate(100);
     $unit = Unit::all();
 
 @endphp
@@ -41,49 +41,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                        foreach ($user as $rs) {
-                            echo "<tr>";
-                            echo "<td>" . $rs->name . $rs->last_name . "</td>";
-                            echo "<td>" . $rs->cpf . "</td>";
-                            echo "<td>" . date('d/m/Y', strtotime($rs->birth_date)) . "</td>";
-                            echo "<td>" . $rs->registration . "</td>";
-                            echo "<td>";
-                            if ($rs->vaccin_confirm == 1) {
-                                echo "Adepto";
-                            } else {
-                                echo "Inapto";
-                            }
-                            echo "</td>";
-                        
-                            $unitRel = Unit::find($rs->vaccin_location_id);
-                                        
-                            if ($unitRel) {
-                                echo "<td>" . $unitRel->name . "</td>";
-                            } else {
-                                echo "<td>Unidade não definida</td>";
-                            }
-
-                            $unitCorp = Unit::find($rs->unit_id);
-                                        
-                            if ($unitCorp) {
-                                echo "<td>" . $unitCorp->name . "</td>";
-                            } else {
-                                echo "<td>Empresa não definida</td>";
-                            }
-                                                  
-                            echo "<td>";
-                                if ($rs->is_active == 1) {
-                                    echo "Ativo";
-                                } else {
-                                    echo "Inativo";
-                                }
-                            echo "</td>";
-
-                            echo "</tr>";
-                        }
-                        @endphp
-
+                        @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $user->name .' '. $user->last_name }}</td>
+                            <td>{{ $user->cpf }}</td>
+                            <td>{{ date('d/m/Y', strtotime($user->birth_date)) }}</td>
+                            <td>{{ $user->registration }}</td>
+                            <td>
+                                @if ($user->vaccin_confirm == 1)
+                                    Adepto
+                                @else
+                                    Inapto
+                                @endif
+                            </td>
+                            <td>{{ $user->vaccin_location_id ? $unit->find($user->vaccin_location_id)->name : 'Unidade não definida' }}</td>
+                            <td>{{ $user->unit_id ? $unit->find($user->unit_id)->name : 'Empresa não definida' }}</td>
+                            <td>
+                                @if ($user->is_active == 1)
+                                    Ativo
+                                @else
+                                    Inativo
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                     
                 </table>
@@ -97,7 +78,7 @@
         new DataTable('#example', {
             layout: {
                 topStart: {
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                    buttons: ['excel']
                 }
             }
         });    
