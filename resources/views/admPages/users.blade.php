@@ -97,7 +97,7 @@
         new DataTable('#example', {
             layout: {
                 topStart: {
-                    buttons: ['Exportar CSV', 'Exportar Excel', 'Exportar PDF']
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
                 }
             }
         });    
