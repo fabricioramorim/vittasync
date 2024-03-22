@@ -77,14 +77,16 @@
 
     <script>
         new DataTable('#example', {
-            layout: {
-                topStart: {
-                    buttons: ['excel']
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    autoFilter: true
                 }
-            }
-        });    
+            ]
+        }
+    }
+});
     </script>
-
-
-    <script></script>
 </x-app-layout>
