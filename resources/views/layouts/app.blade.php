@@ -14,12 +14,10 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-
-    <!-- Styles -->
-    
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" type="text/css" href="{{ asset('resources/datatables/datatables.css') }}">
+    <script src="{{ asset('resources/datatables/datatables.js') }}"></script>
 </head>
 
 <body class="font-sans antialiased">
