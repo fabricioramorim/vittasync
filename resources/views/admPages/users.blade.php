@@ -79,7 +79,7 @@
         new DataTable('#example', {
             layout: {
                 topStart: {
-                    buttons: ['csv']
+                    buttons: ['excel']
                 }
             }
         });    
