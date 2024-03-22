@@ -57,6 +57,7 @@
                                 @endif
                             </td>
                             <td>{{ $dependent->vaccin_qtd }}</td>
+                            <td>{{ $user->find($dependent->employee_id)->name ? $user->find($dependent->employee_id)->name : 'Nome não encontrado' }}
                             </td>
                             @php
                             $nameTit = $user->find($dependent->employee_id);
