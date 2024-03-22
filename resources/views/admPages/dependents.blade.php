@@ -26,10 +26,9 @@
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-8">
                 <div class="pb-4 bg-white dark:bg-gray-900">
                 </div>
-                <table
-                    class="display nowrap w-full text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
+                <table class="table-fixed"
                     id="example">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead>
                         <tr>
 
                             <th>Nome</th>
@@ -63,18 +62,4 @@
     </div>
     </div>
 
-    <script>
-        new DataTable('#example', {
-    layout: {
-        topStart: {
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    autoFilter: true
-                }
-            ]
-        }
-    }
-});
-    </script>
 </x-app-layout>
