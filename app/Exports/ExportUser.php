@@ -17,6 +17,7 @@ class ExportUser implements FromCollection, WithHeadings
 
     public function collection()
     {
+        ini_set('max_execution_time', 360);
         return User::where('is_admin', 0)->get()->map(function ($user) {
             return [
                 'name' => $user->name . ' ' . $user->last_name,

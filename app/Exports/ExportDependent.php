@@ -16,6 +16,7 @@ class ExportDependent implements FromCollection, WithHeadings
 
     public function collection()
     {
+        ini_set('max_execution_time', 360);
         return Dependent::get()->map(function ($dependent) {
             $unit = Unit::all();
             $user = User::all();
