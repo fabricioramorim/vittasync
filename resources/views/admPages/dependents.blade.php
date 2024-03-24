@@ -15,10 +15,19 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dependentes') }}
-        </h2>
-    </x-slot>
+        <div class="grid grid-flow-col auto-cols-max gap-4">
+             <div>
+                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                     {{ __('Dependentes') }}
+                 </h2>
+             </div>
+             <div>
+                 <a href="{{ route('export.dependent') }}" class="bg-green-700 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                     Exportar para Excel
+                 </a>
+             </div>
+        </div>
+     </x-slot>
 
     <div class="py-12">
 
@@ -27,7 +36,7 @@
                 <div class="pb-4 bg-white dark:bg-gray-900">
                 </div>
                 <table
-                    class="display nowrap w-full text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
+                    class="display nowrap text-sm text-left rtl:text-right bg-white text-gray-500 dark:text-gray-400 p-8"
                     id="example">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -65,16 +74,8 @@
 
     <script>
         new DataTable('#example', {
-    layout: {
-        topStart: {
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    autoFilter: true
-                }
-            ]
-        }
-    }
+    fixedHeader: true,
+    responsive: true
 });
     </script>
 

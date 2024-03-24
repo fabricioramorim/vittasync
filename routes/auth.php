@@ -49,6 +49,11 @@ Route::middleware('auth')->group(function () {
     Route::put('dashboard/{confirm}', [DependentController::class, 'confirm'])
                 ->name('dashboard.confirm');
 
+    Route::get('excel-exportUser', [RegisteredUserController::class, 'exportUser'])
+                ->name('export.user');
+    
+    Route::get('excel-exportDependent', [RegisteredUserController::class, 'exportDependent'])
+                ->name('export.dependent');
 
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');

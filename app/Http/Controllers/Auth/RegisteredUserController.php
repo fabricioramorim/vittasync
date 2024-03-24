@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Unit;
+use App\Exports\ExportUser;
+use App\Exports\ExportDependent;
+use Excel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -107,6 +110,16 @@ class RegisteredUserController extends Controller
         else {
             return redirect()->back()->with('message', 'Erro na confirmação!')->with('type', 'danger');
         }
+    }
+
+    public function exportUser() 
+    {
+        return Excel::download(new ExportUser, 'export.xlsx');
+    }
+
+    public function exportDependent() 
+    {
+        return Excel::download(new ExportDependent, 'export.xlsx');
     }
 
 }

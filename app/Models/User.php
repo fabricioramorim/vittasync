@@ -58,4 +58,5 @@ class User extends Authenticatable
         'updated_at' => 'datetime',
         'password' => 'hashed',
     ];
+
 }
