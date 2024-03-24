@@ -44,4 +44,8 @@ class ExportUser implements FromCollection, WithHeadings
             'Status',
         ];
     }
+    public function chunkSize(): int
+    {
+        return 1000;
+    }
 }
