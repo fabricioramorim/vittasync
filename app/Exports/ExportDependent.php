@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Dependent;
+use App\Models\User;
+use App\Models\Unit;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -14,7 +16,7 @@ class ExportDependent implements FromCollection, WithHeadings
 
     public function collection()
     {
-        ini_set('max_execution_time', 3600);
+        ini_set('max_execution_time', 360);
         return Dependent::get()->map(function ($dependent) {
 
             return [
@@ -24,8 +26,8 @@ class ExportDependent implements FromCollection, WithHeadings
                 'vaccine_id' => $dependent->vaccine_id ? 'Adepto' : 'Inapto',
                 'vaccin_qtd' => $dependent->vaccin_qtd,
                 'employee_id' => $dependent->employee_id,
-                'employee_id_name' => $dependent->employee_id,
-                'vaccin_location_id' => $dependent->vaccin_location_id,
+                'employee_id_name' => $dependent->employee_id ? $user->where('registration', $dependent->employee_id)->first()->name : 'Titular não encontrado',
+                'vaccin_location_id' => $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida',
                 'is_active' => $dependent->is_active ? 'Ativo' : 'Inativo',
             ];
         });
