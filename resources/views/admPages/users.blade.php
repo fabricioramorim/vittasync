@@ -50,30 +50,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->name .' '. $user->last_name }}</td>
-                            <td>{{ $user->cpf }}</td>
-                            <td>{{ date('d/m/Y', strtotime($user->birth_date)) }}</td>
-                            <td>{{ $user->registration }}</td>
-                            <td>
-                                @if ($user->vaccin_confirm == 1)
-                                    Adepto
-                                @else
-                                    Inapto
-                                @endif
-                            </td>
-                            <td>{{ $user->vaccin_location_id ? $unit->find($user->vaccin_location_id)->name : 'Unidade não definida' }}</td>
-                            <td>{{ $user->unit_id ? $unit->find($user->unit_id)->name : 'Empresa não definida' }}</td>
-                            <td>
-                                @if ($user->is_active == 1)
-                                    Ativo
-                                @else
-                                    Inativo
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
+                        @foreach ($users->chunk(100) as $chunk)
+                            @foreach ($chunk as $user)
+                                <tr>
+                                    <td>{{ $user->name .' '. $user->last_name }}</td>
+                                    <td>{{ $user->cpf }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($user->birth_date)) }}</td>
+                                    <td>{{ $user->registration }}</td>
+                                    <td>{{ $dependent->vaccine_confirm ? 'Adepto' : 'Inapto' }}</td>
+                                    <td>{{ $user->vaccin_location_id ? $unit->find($user->vaccin_location_id)->name : 'Unidade não definida' }}</td>
+                                    <td>{{ $user->unit_id ? $unit->find($user->unit_id)->name : 'Empresa não definida' }}</td>
+                                    <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
                     </tbody>
                     
                 </table>

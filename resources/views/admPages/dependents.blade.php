@@ -3,9 +3,7 @@
     use App\Models\User;
     use App\Models\Unit;
 
-    $dependents = Cache::remember('dependents', 60, function () {
-        return Dependent::all();
-    });
+    $dependents = Dependent::all();
     $user = User::all();
     $unit = Unit::all();
 
@@ -52,17 +50,19 @@
 
                         </tr>
                     </thead>
-                    @foreach ($dependents as $dependent)
-                        <tr>
-                            <td>{{ $dependent->name . ' ' . $dependent->last_name }}</td>
-                            <td>{{ $dependent->cpf }}</td>
-                            <td>{{ date('d/m/Y', strtotime($dependent->birth_date)) }}</td>
-                            <td>{{ $dependent->vaccine_id ? 'Adepto' : 'Inapto' }}</td>
-                            <td>{{ $dependent->vaccin_qtd }}</td>
-                            <td>{{ $dependent->employee_id }}</td>
-                            <td>{{ $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida' }}</td>
-                            <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
-                        </tr>
+                    @foreach ($dependents->chunk(100) as $chunk)
+                        @foreach ($chunk as $dependent)
+                            <tr>
+                                <td>{{ $dependent->name . ' ' . $dependent->last_name }}</td>
+                                <td>{{ $dependent->cpf }}</td>
+                                <td>{{ date('d/m/Y', strtotime($dependent->birth_date)) }}</td>
+                                <td>{{ $dependent->vaccine_id ? 'Adepto' : 'Inapto' }}</td>
+                                <td>{{ $dependent->vaccin_qtd }}</td>
+                                <td>{{ $dependent->employee_id }}</td>
+                                <td>{{ $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida' }}</td>
+                                <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
+                            </tr>
+                        @endforeach
                     @endforeach
 
                 </table>
