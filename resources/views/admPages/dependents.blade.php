@@ -57,7 +57,7 @@
                                 <td>{{ $dependent->vaccine_id ? 'Adepto' : 'Inapto' }}</td>
                                 <td>{{ $dependent->vaccin_qtd }}</td>
                                 <td>{{ $dependent->employee_id }}</td>
-                                <td>{{ $dependent->vaccin_location_id ? }}</td>
+                                <td>{{ $dependent->vaccin_location_id }}</td>
                                 <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
                             </tr>
                         @endforeach
