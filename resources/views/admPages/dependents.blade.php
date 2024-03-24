@@ -4,8 +4,6 @@
     use App\Models\Unit;
 
     $dependents = Dependent::all();
-    $user = User::all();
-    $unit = Unit::all();
 
 @endphp
 
@@ -59,7 +57,7 @@
                                 <td>{{ $dependent->vaccine_id ? 'Adepto' : 'Inapto' }}</td>
                                 <td>{{ $dependent->vaccin_qtd }}</td>
                                 <td>{{ $dependent->employee_id }}</td>
-                                <td>{{ $dependent->vaccin_location_id ? $unit->find($dependent->vaccin_location_id)->name : 'Unidade não definida' }}</td>
+                                <td>{{ $dependent->vaccin_location_id ? }}</td>
                                 <td>{{ $dependent->is_active ? 'Ativo' : 'Inativo' }}</td>
                             </tr>
                         @endforeach
