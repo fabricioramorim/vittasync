@@ -7,8 +7,6 @@ use App\Models\Unit;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-$unit = Unit::all();
-
 class ExportUser implements FromCollection, WithHeadings
 {
     /**
@@ -19,6 +17,7 @@ class ExportUser implements FromCollection, WithHeadings
     {
         ini_set('max_execution_time', 360);
         return User::where('is_admin', 0)->get()->map(function ($user) {
+            $unit = Unit::all();
             return [
                 'name' => $user->name . ' ' . $user->last_name,
                 'cpf' => $user->cpf,
