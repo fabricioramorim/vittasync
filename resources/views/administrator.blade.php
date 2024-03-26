@@ -145,8 +145,6 @@ foreach ($dependent as $us) {
                 <div class="p-6 ">
                     <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
                     <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
-                    {{ implode(' ', $dates) }}
-                    {{ implode(' ', $dosesByDate) }}
                         <div class="flex flex-col items-center justify-center">
                             <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $userTotalApt }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Colaboradores Adeptos</dd>
@@ -333,13 +331,8 @@ foreach ($dependent as $us) {
                 },
                 series: [
                 {
-                    name: "Developer Edition",
-                    data: [150, 141, 145, 152, 135, 125],
-                    color: "#1A56DB",
-                },
-                {
                     name: "Designer Edition",
-                    data: [64, 41, 76, 41, 113, 173],
+                    data: <?php echo json_encode(array_values($dosesByDate)); ?>,
                     color: "#7E3BF2",
                 },
                 ],
@@ -377,7 +370,7 @@ foreach ($dependent as $us) {
                 width: 6,
                 },
                 xaxis: {
-                categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+                categories: [<?php echo json_encode($today); ?>],
                 labels: {
                     show: false,
                 },
