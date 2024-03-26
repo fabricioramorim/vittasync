@@ -66,7 +66,7 @@
 
     foreach ($dependent as $ds) {
         $date = $ds->updated_at;
-        if ($date && $ds->vaccin_qtd > 0 && $date >= $startDate && $date <= $endDate) {
+        if ($date && $ds->vaccin_qtd && $date >= $startDate && $date <= $endDate) {
             $dateKey = $date->format('d-m');
             if (!isset($dosesByDate[$dateKey])) {
                 $dosesByDate[$dateKey] = $ds->vaccin_qtd;
