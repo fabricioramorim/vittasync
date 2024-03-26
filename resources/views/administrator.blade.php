@@ -133,27 +133,27 @@ foreach ($dependent as $us) {
                     <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
                     <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ $userTotalApt }}</dt>
+                            <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $userTotalApt }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Colaboradores Adeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ $userTotalInapt }}</dt>
+                            <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $userTotalInapt }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Colaboradores Inadeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ $userTotalAptInc }}</dt>
+                            <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $userTotalAptInc }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Colaboradores sem confirmação</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ $dependentTotalApt }}</dt>
+                            <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $dependentTotalApt }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Dependentes Adeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ $dependentTotalInapt }}</dt>
+                            <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $dependentTotalInapt }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Dependentes Inadeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{{ $dependentTotalQuantDoses + $userTotalApt }}</dt>
+                            <dt class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">{{ $dependentTotalQuantDoses + $userTotalApt }}</dt>
                             <dd class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Doses confirmadas</dd>
                         </div>
                     </dl>
