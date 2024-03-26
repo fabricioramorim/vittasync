@@ -81,6 +81,7 @@ foreach ($dependent as $us) {
 
     <div class="py-12">
         <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+            
             <div
                 class="col-span-3 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
                 <div class="p-6 ">
@@ -92,6 +93,32 @@ foreach ($dependent as $us) {
                 </div>
 
                 <div id="data-labels-chart"></div>
+                </div>
+            </div>
+
+            <div
+                class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
+                <div class="p-6 ">
+
+                    <h5
+                        class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
+                        {{ __('Resumo base') }}
+                    </h5>
+                    <p
+                        class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
+
+                        Total colaboradores: {{ $userTotal }}<br>
+                        Total dependentes: {{ $dependentTotal }}<br><br>
+
+                        Dependentes adeptos: {{ $dependentTotalApt }}<br>
+                        Dependentes inadeptos: {{ $dependentTotalInapt }}<br>
+                        Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br><br>
+
+                        Colaboradores adeptos: {{ $userTotalApt }}<br>
+                        Colaboradores inadeptos: {{ $userTotalInapt }}<br>
+                        Colaboradores adeptos sem confirmação: {{ $userTotalAptInc }}<br>
+
+                    </p>
                 </div>
             </div>
             
@@ -145,7 +172,7 @@ foreach ($dependent as $us) {
                     const getChartOptions = () => {
                         return {
                             series: [{{ $dependentTotalApt }}, {{ $dependentTotalInapt }}],
-                            colors: ["#1DBB0B", "#FF3408"],
+                            colors: ["#1A56DB", "#7E3BF2"],
                             chart: {
                                 height: 420,
                                 width: "100%",
@@ -213,7 +240,7 @@ foreach ($dependent as $us) {
                 const getChartOptions = () => {
                     return {
                         series: [{{ $userTotalApt }}, {{ $userTotalInapt }}],
-                        colors: ["#1C64F2", "#EF0000"],
+                        colors: ["#1A56DB", "#7E3BF2"],
                         chart: {
                             height: 420,
                             width: "100%",
