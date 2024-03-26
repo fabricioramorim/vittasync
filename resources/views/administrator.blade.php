@@ -227,7 +227,7 @@ foreach ($dependent as $us) {
                         }
                     }
 
-                    if (document.getElementById("pie-chart") && typeof ApexCharts !== 'undefined') {
+                    if (document.getElementById("dependent-chart") && typeof ApexCharts !== 'undefined') {
                         const chart = new ApexCharts(document.getElementById("dependent-chart"), getChartOptions());
                         chart.render();
                     }
@@ -295,7 +295,7 @@ foreach ($dependent as $us) {
                     }
                 }
 
-                if (document.getElementById("pie-chart") && typeof ApexCharts !== 'undefined') {
+                if (document.getElementById("users-chart") && typeof ApexCharts !== 'undefined') {
                     const chart = new ApexCharts(document.getElementById("users-chart"), getChartOptions());
                     chart.render();
                 }
