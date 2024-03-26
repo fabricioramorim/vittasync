@@ -61,16 +61,21 @@
 
 @php
     $dosesByDate = [];
+    $startDate = DateTime::createFromFormat('d/m/Y', '11/03/2024');
+    $endDate = DateTime::createFromFormat('d/m/Y', '25/03/2024');
+
     foreach ($dependent as $ds) {
-        $date = $ds->updated_at?->format('d-m');  // alterado para 'd-m'
-        if ($ds->vaccin_qtd > 0) {
-            if (!isset($dosesByDate[$date])) {
-                $dosesByDate[$date] = $ds->vaccin_qtd;
+        $date = $ds->updated_at;
+        if ($date && $ds->vaccin_qtd > 0 && $date >= $startDate && $date <= $endDate) {
+            $dateKey = $date->format('d-m');
+            if (!isset($dosesByDate[$dateKey])) {
+                $dosesByDate[$dateKey] = $ds->vaccin_qtd;
             } else {
-                $dosesByDate[$date] += $ds->vaccin_qtd;
+                $dosesByDate[$dateKey] += $ds->vaccin_qtd;
             }
         }
     }
+
     asort($dosesByDate);  // ordena as doses em ordem crescente mantendo a associação de índices
     $dates = array_keys($dosesByDate);  // obtém as datas em ordem crescente
 @endphp
