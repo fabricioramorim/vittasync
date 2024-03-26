@@ -82,28 +82,16 @@ foreach ($dependent as $us) {
     <div class="py-12">
         <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
             <div
-                class="col-span-2 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
+                class="col-span-3 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
                 <div class="p-6 ">
 
-                    <h5
-                        class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
-                        {{ __('Resumo base') }}
-                    </h5>
-                    <p
-                        class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
+                <div class="flex justify-between mb-5">
+                    <div>
+                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Confirmação por período
+                    </div>
+                </div>
 
-                        Total colaboradores: {{ $userTotal }}<br>
-                        Total dependentes: {{ $dependentTotal }}<br><br>
-
-                        Dependentes adeptos: {{ $dependentTotalApt }}<br>
-                        Dependentes inadeptos: {{ $dependentTotalInapt }}<br>
-                        Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br><br>
-
-                        Colaboradores adeptos: {{ $userTotalApt }}<br>
-                        Colaboradores inadeptos: {{ $userTotalInapt }}<br>
-                        Colaboradores adeptos sem confirmação: {{ $userTotalAptInc }}<br>
-
-                    </p>
+                <div id="data-labels-chart"></div>
                 </div>
             </div>
             
