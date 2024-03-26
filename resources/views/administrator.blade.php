@@ -64,10 +64,11 @@
     $dates = [];
     foreach ($dependent as $ds) {
         $date = $ds->updated_at?->format('d-m');  // alterado para 'd-m'
-        $dates[] = $date;  // assuming you want to store the date
-        $dosesByDate[$date] = isset($dosesByDate[$date]) ? $dosesByDate[$date] + $ds->vaccin_qtd : $ds->vaccin_qtd;
-        if (!in_array($date, $dates)) {
-        $dates[] = $date;
+        if (!isset($dosesByDate[$date])) {
+            $dosesByDate[$date] = $ds->vaccin_qtd;
+            $dates[] = $date;
+        } else {
+            $dosesByDate[$date] += $ds->vaccin_qtd;
         }
     }
 @endphp
