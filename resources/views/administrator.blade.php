@@ -116,7 +116,7 @@ foreach ($dependent as $us) {
     </x-slot>
 
     <div class="py-12">
-        <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+        <div class="grid grid-cols-3 gap-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             <div
                 class="col-span-3 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
