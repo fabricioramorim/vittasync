@@ -146,37 +146,7 @@ foreach ($dependent as $us) {
 
                 <!-- Line Chart -->
                 <div class="py-6" id="dependent-chart"></div>
-            </div>
-            <!-- Dependents Chart-->
-            <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-
-                <div class="flex justify-between items-start w-full">
-                    <div class="flex-col items-center">
-                        <div class="flex items-center mb-1">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Dependentes
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Line Chart -->
-                <div class="py-6" id="dependent-chart"></div>
-            </div>
-            <!-- Dependents Chart-->
-            <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-
-                <div class="flex justify-between items-start w-full">
-                    <div class="flex-col items-center">
-                        <div class="flex items-center mb-1">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Dependentes
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Line Chart -->
-                <div class="py-6" id="dependent-chart"></div>
-            </div>
+            </div>    
 
             <!-- Users Chart-->
             <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
@@ -200,7 +170,7 @@ foreach ($dependent as $us) {
                 <div class="flex justify-between items-start w-full">
                     <div class="flex-col items-center">
                         <div class="flex items-center mb-1">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Doses
+                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Doses Totais, inclui não confirmadas.
                             </h5>
                         </div>
                     </div>
