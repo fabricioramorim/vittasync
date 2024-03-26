@@ -61,12 +61,13 @@
 
 @php
     $dosesByDate = [];
+    $confirmByDate = [];
     $startDate = DateTime::createFromFormat('d/m/Y', '11/03/2024');
     $endDate = DateTime::createFromFormat('d/m/Y', '25/03/2024');
 
     foreach ($dependent as $ds) {
         $date = $ds->updated_at;
-        if ($date && $ds->vaccin_qtd && $date >= $startDate && $date <= $endDate) {
+        if ($date && $ds->vaccin_qtd > 0 && $date >= $startDate && $date <= $endDate) {
             $dateKey = $date->format('d-m');
             if (!isset($dosesByDate[$dateKey])) {
                 $dosesByDate[$dateKey] = $ds->vaccin_qtd;
@@ -76,8 +77,22 @@
         }
     }
 
+    foreach ($user as $us) {
+        $date = $us->updated_at;
+        if ($date && $us->vaccin_confirm == 1 && $date >= $startDate && $date <= $endDate) {
+            $dateKey = $date->format('d-m');
+            if (!isset($confirmByDate[$dateKey])) {
+                $confirmByDate[$dateKey] = 1;
+            } else {
+                $confirmByDate[$dateKey]++;
+            }
+        }
+    }
+
     ksort($dosesByDate);  // ordena as datas em ordem crescente mantendo a associação de índices
+    ksort($confirmByDate);  // ordena as datas em ordem crescente mantendo a associação de índices
     $dates = array_keys($dosesByDate);  // obtém as datas em ordem crescente
+    $confirmDates = array_keys($confirmByDate);  // obtém as datas em ordem crescente
 @endphp
 
 @php
@@ -342,9 +357,14 @@ foreach ($dependent as $us) {
                 },
                 series: [
                 {
-                    name: "Designer Edition",
+                    name: "Doses Dependentes",
                     data: <?php echo json_encode(array_values($dosesByDate)); ?>,
                     color: "#7E3BF2",
+                },
+                {
+                    name: "Doses Colaboradores",
+                    data: <?php echo json_encode(array_values($confirmByDate)); ?>,
+                    color: "#1A56DB",
                 },
                 ],
                 chart: {
