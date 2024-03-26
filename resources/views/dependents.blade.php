@@ -8,9 +8,9 @@
             {{ __('Sistema de Adesão - Vacivitta') }}
             <div class="grid grid-cols-2 gap-4 grid-rows-1 items-center">
                 @php
-                    $access = new \Carbon\Carbon($access->where('id', 1)->get('date_access'));
+                    $access = new \Carbon\Carbon($access->where('id', 1)->get('date_access_end'));
                 @endphp
-                @if ($access >= \Carbon\Carbon::now()->subDays(7))
+                @if ($access >= \Carbon\Carbon::now())
                     @if (Auth::user()->vaccin_confirm == 0)
                         <div class="col-span-2">
                             <a type="submit" data-modal-target="confirmD-modal" data-modal-toggle="confirmD-modal"
@@ -127,7 +127,7 @@
                 </p>
 
             </div>
-            @if ($access >= \Carbon\Carbon::now()->subDays(7))
+            @if ($access >= \Carbon\Carbon::now())
                 @if (Auth::user()->vaccin_confirm == 0)
                     <div class="grid grid-cols-4 gap-14">
                         <div class="p-6 pt-0 col-span-3">
@@ -259,7 +259,7 @@
                         </p>
 
                     </div>
-                    @if ($access >= \Carbon\Carbon::now()->subDays(7))
+                    @if ($access >= \Carbon\Carbon::now())
                         @if (Auth::user()->vaccin_confirm == 0)
                             <div class="grid grid-cols-4 gap-14">
                                 <div class="p-6 pt-0 col-span-3">
