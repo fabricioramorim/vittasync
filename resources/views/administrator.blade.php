@@ -28,7 +28,7 @@
 @php
     $userTotalAptInc = 0;
     foreach ($user as $us) {
-        if ($us->vaccin_confirm == 0 && $us->is_active == 1 && $ds->vaccin_location_id == 0) {
+        if ($us->vaccin_confirm == 0 && $us->is_active == 1 && $us->vaccin_location_id != 0) {
             $userTotalAptInc++;
         }
     }
