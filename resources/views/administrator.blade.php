@@ -498,7 +498,7 @@ foreach ($dependent as $us) {
                 show: false,
                 labels: {
                     formatter: function (value) {
-                    return '$' + value;
+                    return value;
                     }
                 }
                 },
