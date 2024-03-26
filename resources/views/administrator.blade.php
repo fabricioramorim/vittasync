@@ -147,7 +147,23 @@ foreach ($dependent as $us) {
                 </div>
 
                 <!-- Line Chart -->
-                <div class="py-6" id="pie-chart"></div>
+                <div class="py-6" id="dependent-chart"></div>
+            </div>
+
+            <!-- Users Chart-->
+            <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+
+            <div class="flex justify-between items-start w-full">
+                <div class="flex-col items-center">
+                    <div class="flex items-center mb-1">
+                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Colaboradores
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Line Chart -->
+            <div class="py-6" id="users-chart"></div>
             </div>
 
             <script>
@@ -155,8 +171,8 @@ foreach ($dependent as $us) {
                 window.addEventListener("load", function() {
                     const getChartOptions = () => {
                         return {
-                            series: [{{ $dependentTotalApt }}, {{ $dependentTotalInapt }}],
-                            colors: ["#1C64F2", "#EF0000"],
+                            series: [{{ $userTotalApt }}, {{ $userTotalInapt }}],
+                            colors: ["#1DBB0B", "#FF3408"],
                             chart: {
                                 height: 420,
                                 width: "100%",
@@ -212,12 +228,79 @@ foreach ($dependent as $us) {
                     }
 
                     if (document.getElementById("pie-chart") && typeof ApexCharts !== 'undefined') {
-                        const chart = new ApexCharts(document.getElementById("pie-chart"), getChartOptions());
+                        const chart = new ApexCharts(document.getElementById("dependent-chart"), getChartOptions());
                         chart.render();
                     }
                 });
             </script>
 
+            <script>
+            // ApexCharts options and config
+            window.addEventListener("load", function() {
+                const getChartOptions = () => {
+                    return {
+                        series: [{{ $dependentTotalApt }}, {{ $dependentTotalInapt }}],
+                        colors: ["#1C64F2", "#EF0000"],
+                        chart: {
+                            height: 420,
+                            width: "100%",
+                            type: "pie",
+                        },
+                        stroke: {
+                            colors: ["white"],
+                            lineCap: "",
+                        },
+                        plotOptions: {
+                            pie: {
+                                labels: {
+                                    show: true,
+                                },
+                                size: "100%",
+                                dataLabels: {
+                                    offset: -25
+                                }
+                            },
+                        },
+                        labels: ["Adeptos", "Inadeptos"],
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontFamily: "Inter, sans-serif",
+                            },
+                        },
+                        legend: {
+                            position: "bottom",
+                            fontFamily: "Inter, sans-serif",
+                        },
+                        yaxis: {
+                            labels: {
+                                formatter: function(value) {
+                                    return value
+                                },
+                            },
+                        },
+                        xaxis: {
+                            labels: {
+                                formatter: function(value) {
+                                    return value
+                                },
+                            },
+                            axisTicks: {
+                                show: false,
+                            },
+                            axisBorder: {
+                                show: false,
+                            },
+                        },
+                    }
+                }
+
+                if (document.getElementById("pie-chart") && typeof ApexCharts !== 'undefined') {
+                    const chart = new ApexCharts(document.getElementById("users-chart"), getChartOptions());
+                    chart.render();
+                }
+            });
+            </script>
 
         </div>
 
