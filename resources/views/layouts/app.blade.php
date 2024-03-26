@@ -12,22 +12,16 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.tailwindcss.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.0/css/responsive.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/4.0.1/css/fixedHeader.dataTables.css">
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.0/js/dataTables.responsive.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.tailwindcss.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.0/js/responsive.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.js"></script>
-    <script src="https://cdn.datatables.net/fixedheader/4.0.1/js/fixedHeader.dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/dataTables.dataTables.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/responsive.dataTables.css') }}" />
     
+    <script src="{{ asset('js/jquery-3.7.1.js') }}"></script>
+    <script src="{{ asset('js/dataTables.js') }}"></script>
+    <script src="{{ asset('js/dataTables.responsive.js') }}"></script>\
+    <script src="{{ asset('js/responsive.dataTables.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">
