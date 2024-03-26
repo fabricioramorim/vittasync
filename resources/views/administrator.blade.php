@@ -170,7 +170,7 @@ foreach ($dependent as $us) {
                 <div class="flex justify-between items-start w-full">
                     <div class="flex-col items-center">
                         <div class="flex items-center mb-1">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Doses Totais, inclui não confirmadas.
+                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Doses totais, inclui não confirmadas.
                             </h5>
                         </div>
                     </div>
