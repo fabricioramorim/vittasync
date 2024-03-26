@@ -60,10 +60,10 @@
 @endphp
 
 @php
-    $dosesByDate = [];
+    @dosesByDate = [];
     $dates = [];
     foreach ($dependent as $ds) {
-        $date = $ds->updated_at?->format('Y-m-d');
+        $date = $ds->updated_at?->format('d-m');  // alterado para 'd-m'
         $dates[] = $date;  // assuming you want to store the date
         $dosesByDate[$date] = isset($dosesByDate[$date]) ? $dosesByDate[$date] + $ds->vaccin_qtd : $ds->vaccin_qtd;
         if (!in_array($date, $dates)) {
@@ -143,6 +143,7 @@ foreach ($dependent as $us) {
             <div
                 class="col-span-2 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
                 <div class="p-6 ">
+                {{ implode(' ', $dates) }}
                     <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
                     <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
                         <div class="flex flex-col items-center justify-center">
