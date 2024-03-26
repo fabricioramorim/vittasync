@@ -60,11 +60,16 @@
 @endphp
 
 @php
+
     $dosesByDate = [];
+
     $dates = [];
+
     foreach ($dependent as $ds) {
-        $date = $ds->updated_at->format('Y-m-d');
+        $date = $ds->updated_at?->format('Y-m-d');
+        $dates[] = $date;  // assuming you want to store the date
     }
+
 @endphp
 
 @php
