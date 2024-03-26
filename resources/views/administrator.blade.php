@@ -370,7 +370,7 @@ foreach ($dependent as $us) {
                 width: 6,
                 },
                 xaxis: {
-                categories: [<?php echo json_encode($today); ?>],
+                categories: <?php echo json_encode($dates); ?>,
                 labels: {
                     show: false,
                 },
