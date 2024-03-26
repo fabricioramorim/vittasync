@@ -61,19 +61,17 @@
 
 @php
     $dosesByDate = [];
-    $dates = [];
     foreach ($dependent as $ds) {
         $date = $ds->updated_at?->format('d-m');  // alterado para 'd-m'
         if (!isset($dosesByDate[$date])) {
             $dosesByDate[$date] = $ds->vaccin_qtd;
-            $dates[] = $date;
         } else {
             $dosesByDate[$date] += $ds->vaccin_qtd;
         }
     }
-    sort($dates);  // ordena as datas em ordem crescente
+    asort($dosesByDate);  // ordena as doses em ordem crescente mantendo a associação de índices
+    $dates = array_keys($dosesByDate);  // obtém as datas em ordem crescente
 @endphp
-
 
 @php
 $userTotal = 0;
