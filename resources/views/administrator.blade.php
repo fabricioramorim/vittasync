@@ -26,6 +26,15 @@
 @endphp
 
 @php
+    $userTotalAptInc = 0;
+    foreach ($user as $us) {
+        if ($us->vaccin_confirm == 0 && $us->is_active == 1 && $ds->vaccin_location_id != 0) {
+            $userTotalApt++;
+        }
+    }
+@endphp
+
+@php
     $dependentTotalInapt = 0;
     foreach ($dependent as $ds) {
         if ($ds->vaccine_id == 0 && $ds->is_active == 1) {
@@ -93,6 +102,7 @@ foreach ($dependent as $us) {
 
                         Colaboradores adeptos: {{ $userTotalApt }}<br>
                         Colaboradores inadeptos: {{ $userTotalInapt }}<br>
+                        Colaboradores adeptos sem confirmação: {{ $userTotalAptInc }}<br>
 
                     </p>
                 </div>
