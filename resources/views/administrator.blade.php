@@ -135,18 +135,19 @@ foreach ($dependent as $us) {
                 </div>
             </div>
 
-            <!-- Line Chart -->
-            <div class="py-6" id="users-chart"></div>
+                <!-- Line Chart -->
+                <div class="py-6" id="users-chart"></div>
             </div>
             
             <!-- Data Label -->
-            <div class="col-span-2 max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
-            <div class="flex justify-between mb-5">
-                <div>
-                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Confirmação por período
+            <div class="col-start-1 col-end-3 max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                <div class="flex justify-between mb-5">
+                    <div>
+                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Confirmação por período
+                    </div>
                 </div>
-            </div>
-            <div id="data-labels-chart"></div>
+
+                <div id="data-labels-chart"></div>
             </div>
 
 
