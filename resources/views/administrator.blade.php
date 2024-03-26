@@ -124,7 +124,7 @@ foreach ($dependent as $us) {
 
                 <div class="flex justify-between mb-5">
                     <div>
-                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Confirmação por período
+                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Doses por período
                     </div>
                 </div>
 
@@ -160,8 +160,20 @@ foreach ($dependent as $us) {
                 </div>
             </div>
 
+            <!-- Doses Chart-->
+            <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+
+            <div class="flex justify-between items-start w-full">
+                <div class="flex-col items-center">
+                    <div class="flex items-center mb-1">
+                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Doses
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
                 <!-- Line Chart -->
-                <div class="py-6" id="users-chart"></div>
+                <div class="py-6" id="doses-chart"></div>
             </div>
             <div
                 class="col-span-2 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
@@ -327,6 +339,74 @@ foreach ($dependent as $us) {
 
                 if (document.getElementById("users-chart") && typeof ApexCharts !== 'undefined') {
                     const chart = new ApexCharts(document.getElementById("users-chart"), getChartOptions());
+                    chart.render();
+                }
+            });
+            </script>
+
+<script>
+            // ApexCharts options and config
+            window.addEventListener("load", function() {
+                const getChartOptions = () => {
+                    return {
+                        series: [{{ $userTotalApt + $userTotalAptInc }}, {{ $dependentTotalQuantDoses }}],
+                        colors: ["#1A56DB", "#7E3BF2"],
+                        chart: {
+                            height: 420,
+                            width: "100%",
+                            type: "pie",
+                        },
+                        stroke: {
+                            colors: ["white"],
+                            lineCap: "",
+                        },
+                        plotOptions: {
+                            pie: {
+                                labels: {
+                                    show: true,
+                                },
+                                size: "100%",
+                                dataLabels: {
+                                    offset: -25
+                                }
+                            },
+                        },
+                        labels: ["Colaboradores", "Dependentes"],
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontFamily: "Inter, sans-serif",
+                            },
+                        },
+                        legend: {
+                            position: "bottom",
+                            fontFamily: "Inter, sans-serif",
+                        },
+                        yaxis: {
+                            labels: {
+                                formatter: function(value) {
+                                    return value
+                                },
+                            },
+                        },
+                        xaxis: {
+                            labels: {
+                                formatter: function(value) {
+                                    return value
+                                },
+                            },
+                            axisTicks: {
+                                show: false,
+                            },
+                            axisBorder: {
+                                show: false,
+                            },
+                        },
+                    }
+                }
+
+                if (document.getElementById("doses-chart") && typeof ApexCharts !== 'undefined') {
+                    const chart = new ApexCharts(document.getElementById("doses-chart"), getChartOptions());
                     chart.render();
                 }
             });
