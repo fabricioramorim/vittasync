@@ -76,7 +76,7 @@
         }
     }
 
-    asort($dosesByDate);  // ordena as doses em ordem crescente mantendo a associação de índices
+    ksort($dosesByDate);  // ordena as datas em ordem crescente mantendo a associação de índices
     $dates = array_keys($dosesByDate);  // obtém as datas em ordem crescente
 @endphp
 
