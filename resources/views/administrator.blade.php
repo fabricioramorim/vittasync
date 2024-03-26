@@ -107,32 +107,6 @@ foreach ($dependent as $us) {
                     </p>
                 </div>
             </div>
-            <div
-                class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
-                <div class="p-6 ">
-
-                    <h5
-                        class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
-                        {{ __('Colaboradores Pendentes') }}
-                    </h5>
-                    <p
-                        class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
-
-                        @php
-                            $confirmed = 0;
-                            foreach ($user as $us) {
-                                if ($us->is_admin == 0 && $us->vaccin_confirm == 0 && $us->is_active == 1) {
-                                    $confirmed++;
-                                }
-                            }
-                        @endphp
-
-                        Total: {{ $confirmed }}
-
-                    </p>
-                </div>
-            </div>
-
             
             <!-- Dependents Chart-->
             <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
@@ -171,7 +145,7 @@ foreach ($dependent as $us) {
                 window.addEventListener("load", function() {
                     const getChartOptions = () => {
                         return {
-                            series: [{{ $userTotalApt }}, {{ $userTotalInapt }}],
+                            series: [{{ $dependentTotalApt }}, {{ $dependentTotalInapt }}],
                             colors: ["#1DBB0B", "#FF3408"],
                             chart: {
                                 height: 420,
@@ -239,7 +213,7 @@ foreach ($dependent as $us) {
             window.addEventListener("load", function() {
                 const getChartOptions = () => {
                     return {
-                        series: [{{ $dependentTotalApt }}, {{ $dependentTotalInapt }}],
+                        series: [{{ $userTotalApt }}, {{ $userTotalInapt }}],
                         colors: ["#1C64F2", "#EF0000"],
                         chart: {
                             height: 420,
