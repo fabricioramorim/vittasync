@@ -60,6 +60,21 @@
 @endphp
 
 @php
+    function getDosesData($dependents) {
+    $dosesByDate = [];
+    $dates = [];
+    foreach ($dependents as $dependent) {
+        $date = $dependent->updated_at->format('Y-m-d');
+        $dosesByDate[$date] = isset($dosesByDate[$date]) ? $dosesByDate[$date] + $dependent->vaccin_qtd : $dependent->vaccin_qtd;
+        if (!in_array($date, $dates)) {
+        $dates[] = $date;
+        }
+    }
+    return [$dates, $dosesByDate];
+    }
+@endphp
+
+@php
 $userTotal = 0;
 $dependentTotal = 0;
 
@@ -128,8 +143,21 @@ foreach ($dependent as $us) {
                 <div class="py-6" id="users-chart"></div>
             </div>
             <div
-                class="col-span-3 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
+                class="col-span-2 relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
                 <div class="p-6 ">
+                    @php
+                    $dependents = Dependent::all();
+list($dates, $dosesByDate) = getDosesData($dependents);
+
+// Exibe as datas
+echo implode(', ', $dates);
+
+// Exibe a quantidade de doses para cada data
+foreach ($dosesByDate as $date => $doses) {
+  echo "{$date}: {$doses} doses\n";
+}
+
+                    @endphp
                     <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
                     <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
                         <div class="flex flex-col items-center justify-center">
