@@ -60,7 +60,7 @@
 @endphp
 
 @php
-    @dosesByDate = [];
+    $dosesByDate = [];
     $dates = [];
     foreach ($dependent as $ds) {
         $date = $ds->updated_at?->format('d-m');  // alterado para 'd-m'
