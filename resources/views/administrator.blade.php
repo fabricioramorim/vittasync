@@ -95,32 +95,6 @@ foreach ($dependent as $us) {
                 <div id="data-labels-chart"></div>
                 </div>
             </div>
-
-            <div
-                class="relative flex flex-col text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl ">
-                <div class="p-6 ">
-
-                    <h5
-                        class="block mb-5 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 cursor-default">
-                        {{ __('Resumo base') }}
-                    </h5>
-                    <p
-                        class="block font-sans text-md antialiased font-light leading-relaxed text-inherit cursor-default">
-
-                        Total colaboradores: {{ $userTotal }}<br>
-                        Total dependentes: {{ $dependentTotal }}<br><br>
-
-                        Dependentes adeptos: {{ $dependentTotalApt }}<br>
-                        Dependentes inadeptos: {{ $dependentTotalInapt }}<br>
-                        Total de doses dos dependentes: {{ $dependentTotalQuantDoses }}<br><br>
-
-                        Colaboradores adeptos: {{ $userTotalApt }}<br>
-                        Colaboradores inadeptos: {{ $userTotalInapt }}<br>
-                        Colaboradores adeptos sem confirmação: {{ $userTotalAptInc }}<br>
-
-                    </p>
-                </div>
-            </div>
             
             <!-- Dependents Chart-->
             <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
@@ -153,33 +127,32 @@ foreach ($dependent as $us) {
                 <!-- Line Chart -->
                 <div class="py-6" id="users-chart"></div>
             </div>
-            
-            <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+            <div class="col-span-3 max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
                 <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
                     <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-2 text-3xl font-extrabold">73M+</dt>
-                            <dd class="text-gray-500 dark:text-gray-400">Developers</dd>
+                            <dt class="mb-2 text-3xl font-extrabold">{{ $userTotalApt }}</dt>
+                            <dd class="text-gray-500 dark:text-gray-400">Colaboradores Adeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-2 text-3xl font-extrabold">100M+</dt>
-                            <dd class="text-gray-500 dark:text-gray-400">Public repositories</dd>
+                            <dt class="mb-2 text-3xl font-extrabold">{{ $userTotalInapt }}</dt>
+                            <dd class="text-gray-500 dark:text-gray-400">Colaboradores Inadeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-2 text-3xl font-extrabold">1000s</dt>
-                            <dd class="text-gray-500 dark:text-gray-400">Open source projects</dd>
+                            <dt class="mb-2 text-3xl font-extrabold">{{ $userTotalAptInc }}</dt>
+                            <dd class="text-gray-500 dark:text-gray-400">Colaboradores sem confirmação</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-2 text-3xl font-extrabold">1B+</dt>
-                            <dd class="text-gray-500 dark:text-gray-400">Contributors</dd>
+                            <dt class="mb-2 text-3xl font-extrabold">{{ $dependentTotalApt }}</dt>
+                            <dd class="text-gray-500 dark:text-gray-400">Dependentes Adeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-2 text-3xl font-extrabold">90+</dt>
-                            <dd class="text-gray-500 dark:text-gray-400">Top Forbes companies</dd>
+                            <dt class="mb-2 text-3xl font-extrabold">{{ $dependentTotalInapt }}</dt>
+                            <dd class="text-gray-500 dark:text-gray-400">Dependentes Inadeptos</dd>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <dt class="mb-2 text-3xl font-extrabold">4M+</dt>
-                            <dd class="text-gray-500 dark:text-gray-400">Organizations</dd>
+                            <dt class="mb-2 text-3xl font-extrabold">{{ $dependentTotalQuantDoses + $userTotalApt }}</dt>
+                            <dd class="text-gray-500 dark:text-gray-400">Doses confirmadas</dd>
                         </div>
                     </dl>
                 </div>
