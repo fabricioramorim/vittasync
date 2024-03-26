@@ -71,7 +71,9 @@
             $dosesByDate[$date] += $ds->vaccin_qtd;
         }
     }
+    sort($dates);  // ordena as datas em ordem crescente
 @endphp
+
 
 @php
 $userTotal = 0;
